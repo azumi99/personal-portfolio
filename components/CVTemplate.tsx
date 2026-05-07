@@ -10,7 +10,8 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const baseUrl = mounted && typeof window !== 'undefined' ? window.location.origin : '';
