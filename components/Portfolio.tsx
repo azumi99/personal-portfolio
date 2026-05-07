@@ -194,10 +194,6 @@ const Portfolio: React.FC = () => {
               </div>
               <h3 className="font-h2 text-h2 text-on-surface mb-xs leading-tight">{project.title}</h3>
               <p className="font-body-sm text-body-sm text-on-surface-variant mb-md flex-grow">{project.desc}</p>
-              <div className="flex items-center text-primary font-bold gap-1 cursor-pointer group/link w-fit">
-                <span className="text-body-md">View Details</span>
-                <span className="material-symbols-outlined card-action-icon transition-transform duration-200">arrow_forward</span>
-              </div>
             </div>
           </article>
         ))}
