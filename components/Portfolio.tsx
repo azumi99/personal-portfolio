@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const projects = [
   {
@@ -178,10 +179,12 @@ const Portfolio: React.FC = () => {
             style={{ animationDelay: `${index * 50}ms` }}
           >
             <div className="aspect-video bg-surface-container overflow-hidden">
-              <img 
+              <Image 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 alt={project.title} 
                 src={project.img}
+                width={600}
+                height={340}
               />
             </div>
             <div className="p-lg flex flex-col flex-grow">

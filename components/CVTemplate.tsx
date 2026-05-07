@@ -7,11 +7,13 @@ interface CVTemplateProps {
 }
 
 const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
-  const [baseUrl, setBaseUrl] = useState('');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setBaseUrl(window.location.origin);
+    setMounted(true);
   }, []);
+
+  const baseUrl = mounted && typeof window !== 'undefined' ? window.location.origin : '';
 
   return (
     <div 

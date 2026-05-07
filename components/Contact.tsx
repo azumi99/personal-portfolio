@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 const Contact: React.FC = () => {
   return (
@@ -94,10 +95,12 @@ const Contact: React.FC = () => {
       
       <section className="max-w-7xl mx-auto px-margin mt-xl mb-xl">
         <div className="relative w-full h-[400px] rounded-xl overflow-hidden border border-outline-variant/30 shadow-lg">
-          <img 
+          <Image 
             className="w-full h-full object-cover" 
             alt="Professional workspace in Jakarta"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx-DXQz_tn4dzXyTJQQQdpIIchkT49CnvEdZzh2qJeEYdeIGiChwGvTqLsRQfDWw9VrCqQCFJzmeMG1IY0coLFgVkJy9PN8NY6C1TQ5Q3haOu4sIyp_baF7yIAOZKdCH7UsECrOmCHSlYcKoVfGDegMt9mVNsTJ9z9icLsWRYgSsOhNEiBHER2KbDGHf0ZfpcWFKOVT-3k0PGu3VOTTGUQJoVevML-tLrAa0j5v1RiMfgwrOt5GOQfpnrCLJr1-P_L4fbemH5UQ6s"
+            fill
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-40"></div>
         </div>

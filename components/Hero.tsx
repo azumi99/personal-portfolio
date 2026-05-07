@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 interface HeroProps {
   onDownloadCV?: () => void;
@@ -49,10 +50,13 @@ const Hero: React.FC<HeroProps> = ({ onDownloadCV }) => {
         </div>
         <div className="lg:col-span-5 relative">
           <div className="relative rounded-xl overflow-hidden shadow-2xl bg-surface-container-lowest p-2">
-            <img 
+            <Image 
               alt="Ilham Tegar Bintang Ananda" 
               className="w-full aspect-[4/5] object-cover rounded-lg" 
               src="/assets/img/profile.jpg"
+              width={400}
+              height={500}
+              priority
             />
             <div className="absolute bottom-6 left-6 right-6 p-6 bg-surface/90 backdrop-blur-md rounded-xl shadow-lg border border-outline-variant/30">
               <div className="flex justify-around items-center">

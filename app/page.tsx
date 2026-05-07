@@ -10,12 +10,12 @@ import CVTemplate from '@/components/CVTemplate';
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
 
-  const navLinks = [
+  const navLinks = React.useMemo(() => [
     { id: 'home', label: 'Home' },
     { id: 'experience', label: 'Experience' },
     { id: 'portfolio', label: 'Projects' },
     { id: 'contact', label: 'Contact' }
-  ];
+  ], []);
 
   // High-reliability CV Download using a new window to ensure isolated styling
   const handleDownloadCV = () => {
@@ -85,7 +85,7 @@ export default function Home() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navLinks]);
 
   return (
     <main className="min-h-screen selection-primary">
