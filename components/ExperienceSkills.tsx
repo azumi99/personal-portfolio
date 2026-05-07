@@ -98,7 +98,6 @@ const ExperienceSkills: React.FC = () => {
                 <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">Ecosystem</p>
                 <div className="flex flex-wrap gap-2">
                     {[
-                      { icon: 'hub', name: 'n8n' },
                       { icon: 'layers', name: 'Frappe' },
                       { icon: 'devices', name: 'Expo' },
                       { icon: 'database', name: 'Firebase' },
@@ -117,6 +116,7 @@ const ExperienceSkills: React.FC = () => {
                 <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">AI & Agents</p>
                 <div className="flex flex-wrap gap-2">
                   {[
+                    { icon: 'hub', name: 'n8n' },
                     { icon: 'smart_toy', name: 'Claude Code' },
                     { icon: 'bolt', name: 'Antigravity' },
                     { icon: 'psychology', name: 'Gemini' },

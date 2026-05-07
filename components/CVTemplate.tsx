@@ -52,8 +52,8 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
             <p><strong>Core:</strong> React Native, Laravel, Next.js, Filament</p>
           </div>
           <div>
-            <p><strong>Ecosystem:</strong> n8n, AI Agents, OpenAI, ERPNext, Frappe, Expo, Firebase, WordPress, MikroTik, Networking</p>
-            <p className="mt-1"><strong>AI & Agents:</strong> Claude Code, Antigravity, Gemini, Hermes, OpenClaw, Z.ai</p>
+            <p><strong>Ecosystem:</strong> OpenAI, ERPNext, Frappe, Expo, Firebase, WordPress, MikroTik, Networking</p>
+            <p className="mt-1"><strong>AI & Agents:</strong> n8n, Claude Code, Antigravity, Gemini, Hermes, OpenClaw, Z.ai</p>
             <p className="mt-1"><strong>Databases:</strong> MySQL, PostgreSQL, SQLite, Supabase</p>
           </div>
         </div>
