@@ -85,8 +85,8 @@ const ExperienceSkills: React.FC = () => {
                   {[
                     { name: 'React Native' },
                     { name: 'Laravel' },
-                    { name: 'WordPress' },
-                    { name: 'Networking' }
+                    { name: 'Next.js' },
+                    { name: 'Filament' }
                   ].map((skill) => (
                     <div key={skill.name} className="px-4 py-3 bg-surface-container-low rounded-lg flex items-center justify-center border border-outline-variant/10">
                       <span className="font-semibold text-primary">{skill.name}</span>
@@ -97,18 +97,52 @@ const ExperienceSkills: React.FC = () => {
               <div>
                 <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">Ecosystem</p>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    { icon: 'code', name: 'Next.js' },
-                    { icon: 'hub', name: 'n8n' },
-                    { icon: 'dashboard', name: 'Filament' },
-                    { icon: 'layers', name: 'Frappe' },
-                    { icon: 'devices', name: 'Expo' },
-                    { icon: 'database', name: 'Firebase' },
-                    { icon: 'router', name: 'MikroTik' }
-                  ].map((item) => (
+                    {[
+                      { icon: 'hub', name: 'n8n' },
+                      { icon: 'layers', name: 'Frappe' },
+                      { icon: 'devices', name: 'Expo' },
+                      { icon: 'database', name: 'Firebase' },
+                      { icon: 'language', name: 'WordPress' },
+                      { icon: 'router', name: 'MikroTik' },
+                      { icon: 'settings_ethernet', name: 'Networking' }
+                    ].map((item) => (
                     <span key={item.name} className="px-3 py-1.5 bg-surface-container text-on-surface-variant rounded-md font-body-sm flex items-center gap-1.5">
                       <span className="material-symbols-outlined text-[16px]">{item.icon}</span>
                       {item.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">AI & Agents</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { icon: 'smart_toy', name: 'Claude Code' },
+                    { icon: 'bolt', name: 'Antigravity' },
+                    { icon: 'psychology', name: 'Gemini' },
+                    { icon: 'auto_awesome', name: 'Hermes' },
+                    { icon: 'terminal', name: 'OpenClaw' },
+                    { icon: 'model_training', name: 'Z.ai' }
+                  ].map((ai) => (
+                    <span key={ai.name} className="px-3 py-1.5 bg-surface-container text-on-surface-variant rounded-md font-body-sm flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-[16px]">{ai.icon}</span>
+                      {ai.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">Databases</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { icon: 'storage', name: 'MySQL' },
+                    { icon: 'database', name: 'PostgreSQL' },
+                    { icon: 'data_object', name: 'SQLite' },
+                    { icon: 'cloud_done', name: 'Supabase' }
+                  ].map((db) => (
+                    <span key={db.name} className="px-3 py-1.5 bg-surface-container text-on-surface-variant rounded-md font-body-sm flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-[16px]">{db.icon}</span>
+                      {db.name}
                     </span>
                   ))}
                 </div>

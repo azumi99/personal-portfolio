@@ -49,10 +49,12 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
         <h2 className="text-[14pt] font-bold uppercase border-b border-gray-300 mb-2">Technical Skills</h2>
         <div className="grid grid-cols-2 gap-x-8 text-[11pt]">
           <div>
-            <p><strong>Core:</strong> React Native, Laravel, WordPress, Networking</p>
+            <p><strong>Core:</strong> React Native, Laravel, Next.js, Filament</p>
           </div>
           <div>
-            <p><strong>Ecosystem:</strong> n8n, AI Agents, OpenAI, Filament, ERPNext, Next.js, Expo, Firebase, MikroTik</p>
+            <p><strong>Ecosystem:</strong> n8n, AI Agents, OpenAI, ERPNext, Frappe, Expo, Firebase, WordPress, MikroTik, Networking</p>
+            <p className="mt-1"><strong>AI & Agents:</strong> Claude Code, Antigravity, Gemini, Hermes, OpenClaw, Z.ai</p>
+            <p className="mt-1"><strong>Databases:</strong> MySQL, PostgreSQL, SQLite, Supabase</p>
           </div>
         </div>
       </section>

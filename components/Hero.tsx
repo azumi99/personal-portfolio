@@ -39,9 +39,8 @@ const Hero: React.FC<HeroProps> = ({ onDownloadCV }) => {
               <span className="material-symbols-outlined">mail</span>
             </a>
           </div>
-          {/* Tech Stack Chips */}
           <div className="pt-md flex flex-wrap gap-3">
-            {['React Native', 'Laravel', 'Next.js', 'WordPress', 'n8n', 'CodeIgniter'].map((tech) => (
+            {['React Native', 'Laravel', 'Next.js', 'Filament', 'Claude Code', 'Antigravity', 'PostgreSQL', 'Supabase'].map((tech) => (
               <span key={tech} className="px-4 py-2 bg-surface-container-low text-primary rounded-lg font-label-caps text-label-caps border border-outline-variant/30">
                 {tech}
               </span>

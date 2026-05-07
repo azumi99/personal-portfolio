@@ -149,7 +149,7 @@ export default function Home() {
           </div>
           <div className="flex gap-6">
             <a href="https://github.com/azumi99" target="_blank" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">GitHub</a>
-            <a href="https://www.anandanesia.com" target="_blank" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">Blog</a>
+            <a href="https://allindonesian.com" target="_blank" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">Blog</a>
             <a href="https://www.tiktok.com/@wb.kind" target="_blank" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">TikTok</a>
             <a href="mailto:ilhambintang399@gmail.com" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">Email</a>
           </div>

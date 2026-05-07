@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
               <a className="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-secondary hover:border-primary hover:text-primary transition-all active:scale-95" href="https://github.com/azumi99" target="_blank">
                 <span className="material-symbols-outlined">code</span>
               </a>
-              <a className="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-secondary hover:border-primary hover:text-primary transition-all active:scale-95" href="https://www.anandanesia.com" target="_blank">
+              <a className="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-secondary hover:border-primary hover:text-primary transition-all active:scale-95" href="https://allindonesian.com" target="_blank">
                 <span className="material-symbols-outlined">language</span>
               </a>
               <a className="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center text-secondary hover:border-primary hover:text-primary transition-all active:scale-95" href="https://wa.link/x5uayn" target="_blank">
