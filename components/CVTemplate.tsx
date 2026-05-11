@@ -74,7 +74,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
             <li>Developing and maintaining mobile projects including HRIS, Wakita apps, CRM, and FedEx Monitoring.</li>
             <li>Engineered advanced automation workflows with n8n & AI Agents for WhatsApp verification and Intelligent OCR.</li>
             <li>Built AWB OCR Management Dashboard (Filament) and Transys Master Data system (ERPNext).</li>
-            <li>Developed FSM (Field Service Management) app using React Native Expo Custom Client.</li>
+            <li>Developed comprehensive FSM (Field Service Management) system with offline-first React Native app for remote school installations, featuring automated background data and photo synchronization.</li>
           </ul>
         </div>
 

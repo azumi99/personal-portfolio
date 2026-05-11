@@ -134,8 +134,15 @@ const projects = [
     title: 'FSM - Field Service Management',
     category: 'APP',
     tech: 'RN EXPO CUSTOM CLIENT',
-    desc: 'Mobile application for field installers to manage interactive TV distribution in schools, featuring status tracking and task management.',
+    desc: 'Offline-first mobile application for field installers to manage TV distribution in Indonesia\'s remotest areas, featuring automated background photo and data synchronization.',
     img: '/assets/img/fsm-installer-app.png'
+  },
+  {
+    title: 'FSM - Distribution & Installation Dashboard',
+    category: 'WEB',
+    tech: 'LARAVEL FILAMENT',
+    desc: 'Comprehensive web-based Field Service Management platform for monitoring and managing the nationwide distribution and installation of interactive TVs in schools.',
+    img: '/assets/img/fsm-dashboard.png'
   }
 ];
 
