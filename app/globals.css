@@ -156,6 +156,18 @@
     @apply h-2 w-2 rounded-full bg-primary;
     box-shadow: 0 0 0 6px rgba(15, 42, 144, 0.08), 0 0 24px rgba(15, 42, 144, 0.62);
   }
+
+  @media (max-width: 640px) {
+    .dock-compact .dock-item {
+      width: 32px !important;
+      height: 32px !important;
+    }
+
+    .dock-compact .dock-item-icon {
+      width: 16px !important;
+      height: 16px !important;
+    }
+  }
 }
 
 @layer utilities {

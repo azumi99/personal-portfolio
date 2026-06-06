@@ -9,6 +9,7 @@ interface DockProps {
   children: ReactNode;
   magnification?: number;
   distance?: number;
+  mobileSize?: number;
 }
 
 interface DockIconProps {
@@ -28,7 +29,7 @@ interface DockContextValue {
 
 const DockContext = createContext<DockContextValue | null>(null);
 
-const Dock = ({ className, children, magnification = 60, distance = 100 }: DockProps) => {
+const Dock = ({ className, children, magnification = 60, distance = 100, mobileSize = BASE_SIZE }: DockProps) => {
   const mouseX = useMotionValue(Infinity);
 
   return (
@@ -36,6 +37,7 @@ const Dock = ({ className, children, magnification = 60, distance = 100 }: DockP
       <motion.div
         onMouseMove={(event) => mouseX.set(event.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
+        style={{ "--dock-mobile-size": `${mobileSize}px` } as React.CSSProperties}
         className={cn("mx-auto flex h-full w-max items-end justify-center overflow-visible rounded-full border", className)}
       >
         {children}
@@ -61,8 +63,8 @@ const DockIcon = ({ className, children }: DockIconProps) => {
   const iconSize = useSpring(useTransform(distanceCalc, [-distance, 0, distance], [BASE_SIZE * ICON_SIZE_RATIO, magnification * ICON_SIZE_RATIO, BASE_SIZE * ICON_SIZE_RATIO]), SPRING);
 
   return (
-    <motion.div ref={ref} style={{ width: containerSize, height: containerSize }} className={cn("relative flex aspect-square shrink-0 items-center justify-center rounded-full", className)}>
-      <motion.div style={{ width: iconSize, height: iconSize }} className="flex items-center justify-center">
+    <motion.div ref={ref} style={{ width: containerSize, height: containerSize }} className={cn("dock-item relative flex aspect-square h-[var(--dock-mobile-size)] w-[var(--dock-mobile-size)] shrink-0 items-center justify-center rounded-full sm:h-auto sm:w-auto", className)}>
+      <motion.div style={{ width: iconSize, height: iconSize }} className="dock-item-icon flex items-center justify-center">
         {children}
       </motion.div>
     </motion.div>

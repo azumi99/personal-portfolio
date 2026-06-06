@@ -5,12 +5,11 @@ import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { generateCvPdf } from "@/lib/generate-cv-pdf";
-import { MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export default function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
 
   const handleDownloadCV = () => {
     const pdf = generateCvPdf(window.location.origin);
@@ -26,8 +25,8 @@ export default function Navbar() {
   };
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-4 z-30 no-print">
-      <Dock className="pointer-events-auto relative z-50 mx-auto flex h-14 w-fit gap-2 border bg-white/90 p-2 shadow-[0_0_10px_3px] shadow-primary/5 backdrop-blur-3xl">
+    <div className="pointer-events-none fixed inset-x-0 bottom-2 z-30 no-print px-2 sm:bottom-4 sm:px-3">
+      <Dock className="dock-compact pointer-events-auto relative z-50 mx-auto flex h-auto max-w-[min(22rem,calc(100vw-1rem))] flex-wrap items-center justify-center gap-1 overflow-visible rounded-2xl border bg-white/90 p-1.5 shadow-[0_0_10px_3px] shadow-primary/5 backdrop-blur-3xl sm:h-14 sm:w-fit sm:max-w-full sm:flex-nowrap sm:items-end sm:gap-2 sm:rounded-full sm:p-2">
         {DATA.navbar.map((item) => (
           <Tooltip key={item.href}>
             <TooltipTrigger asChild>
@@ -49,17 +48,17 @@ export default function Navbar() {
             </TooltipContent>
           </Tooltip>
         ))}
-        <Separator className="m-auto h-2/3 w-px bg-outline-variant" />
+        <Separator className="m-auto hidden h-2/3 w-px shrink-0 bg-outline-variant sm:block" />
         <Tooltip>
           <TooltipTrigger asChild>
-            <button type="button" onClick={() => setTheme(isDark ? "light" : "dark")} aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}>
+            <button type="button" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} aria-label="Toggle color mode" suppressHydrationWarning>
               <DockIcon className="size-full cursor-pointer rounded-3xl border border-outline-variant bg-background p-0 text-secondary transition-colors hover:bg-surface-container hover:text-on-surface">
-                {isDark ? <SunIcon className="size-full overflow-hidden rounded-sm object-contain" /> : <MoonIcon className="size-full overflow-hidden rounded-sm object-contain" />}
+                <MoonIcon className="size-full overflow-hidden rounded-sm object-contain" />
               </DockIcon>
             </button>
           </TooltipTrigger>
           <TooltipContent side="top" sideOffset={8} className="rounded-xl bg-primary px-4 py-2 text-sm text-on-primary shadow-lg">
-            <p>{isDark ? "Light Mode" : "Dark Mode"}</p>
+            <p>Dark / Light Mode</p>
             <TooltipArrow className="fill-primary" />
           </TooltipContent>
         </Tooltip>

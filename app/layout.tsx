@@ -43,7 +43,7 @@ export default function RootLayout({
                 }}
               />
             </div>
-            <div className="relative z-10 mx-auto max-w-2xl px-6 py-12 pb-24 sm:py-24">{children}</div>
+            <div className="relative z-10 mx-auto max-w-2xl px-6 py-12 pb-36 sm:py-24 sm:pb-24">{children}</div>
             <Navbar />
           </TooltipProvider>
         </ThemeProvider>
