@@ -5,8 +5,13 @@ import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipArrow, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { generateCvPdf } from "@/lib/generate-cv-pdf";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   const handleDownloadCV = () => {
     const pdf = generateCvPdf(window.location.origin);
     const url = URL.createObjectURL(pdf);
@@ -45,6 +50,19 @@ export default function Navbar() {
           </Tooltip>
         ))}
         <Separator className="m-auto h-2/3 w-px bg-outline-variant" />
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button type="button" onClick={() => setTheme(isDark ? "light" : "dark")} aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}>
+              <DockIcon className="size-full cursor-pointer rounded-3xl border border-outline-variant bg-background p-0 text-secondary transition-colors hover:bg-surface-container hover:text-on-surface">
+                {isDark ? <SunIcon className="size-full overflow-hidden rounded-sm object-contain" /> : <MoonIcon className="size-full overflow-hidden rounded-sm object-contain" />}
+              </DockIcon>
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="top" sideOffset={8} className="rounded-xl bg-primary px-4 py-2 text-sm text-on-primary shadow-lg">
+            <p>{isDark ? "Light Mode" : "Dark Mode"}</p>
+            <TooltipArrow className="fill-primary" />
+          </TooltipContent>
+        </Tooltip>
         {Object.entries(DATA.contact.social)
           .filter(([, social]) => social.navbar)
           .map(([name, social]) => {

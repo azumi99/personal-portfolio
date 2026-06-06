@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -72,14 +73,14 @@ module.exports = {
         "xl": "4rem"
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        "h1": ["Inter"],
-        "label-caps": ["Inter"],
-        "body-sm": ["Inter"],
-        "display": ["Inter"],
-        "body-md": ["Inter"],
-        "body-lg": ["Inter"],
-        "h2": ["Inter"]
+        sans: ['var(--font-sans)', 'Poppins', 'sans-serif'],
+        "h1": ['var(--font-sans)', 'Poppins', 'sans-serif'],
+        "label-caps": ['var(--font-sans)', 'Poppins', 'sans-serif'],
+        "body-sm": ['var(--font-sans)', 'Poppins', 'sans-serif'],
+        "display": ['var(--font-sans)', 'Poppins', 'sans-serif'],
+        "body-md": ['var(--font-sans)', 'Poppins', 'sans-serif'],
+        "body-lg": ['var(--font-sans)', 'Poppins', 'sans-serif'],
+        "h2": ['var(--font-sans)', 'Poppins', 'sans-serif']
       },
       fontSize: {
         "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],

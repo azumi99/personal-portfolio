@@ -8,6 +8,60 @@
     --foreground: #141b2b;
   }
 
+  .dark {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+  }
+
+  .dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  .dark .bg-background,
+  .dark .bg-surface,
+  .dark .bg-surface-container-lowest {
+    @apply bg-slate-950;
+  }
+
+  .dark .bg-white,
+  .dark .bg-white\/90,
+  .dark .bg-surface-container,
+  .dark .bg-surface-container-low,
+  .dark .bg-surface-container-high,
+  .dark .bg-surface-container-highest,
+  .dark .bg-primary-fixed,
+  .dark .bg-secondary-container {
+    @apply bg-slate-900;
+  }
+
+  .dark .text-on-background,
+  .dark .text-on-surface,
+  .dark .text-on-primary-fixed,
+  .dark .text-on-secondary-container {
+    @apply text-slate-100;
+  }
+
+  .dark .text-on-surface-variant,
+  .dark .text-secondary {
+    @apply text-slate-400;
+  }
+
+  .dark .text-primary {
+    @apply text-blue-300;
+  }
+
+  .dark .bg-primary {
+    @apply bg-blue-500;
+  }
+
+  .dark .border,
+  .dark .border-outline-variant,
+  .dark .border-outline-variant\/20,
+  .dark .border-outline-variant\/30,
+  .dark .border-outline-variant\/40 {
+    @apply border-slate-700;
+  }
+
   * {
     @apply box-border;
   }
