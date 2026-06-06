@@ -135,7 +135,7 @@ const projects = [
     category: 'APP',
     tech: 'RN EXPO CUSTOM CLIENT',
     desc: 'Offline-first mobile application for field installers to manage TV distribution in Indonesia\'s remotest areas, featuring automated background photo and data synchronization.',
-    img: '/assets/img/fsm-installer-app.png'
+    img: '/assets/img/fsm-field-service-management.png'
   },
   {
     title: 'FSM - Distribution & Installation Dashboard',
