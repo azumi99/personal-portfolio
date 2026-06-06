@@ -1,165 +1,131 @@
-'use client';
+/* eslint-disable @next/next/no-img-element */
+import BlurFade from "@/components/magicui/blur-fade";
+import BlurFadeText from "@/components/magicui/blur-fade-text";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DATA } from "@/data/resume";
+import Link from "next/link";
+import ContactSection from "@/components/section/contact-section";
+import ProjectsSection from "@/components/section/projects-section";
+import WorkSection from "@/components/section/work-section";
+import { ArrowUpRight } from "lucide-react";
 
-import React, { useState, useEffect } from 'react';
-import Hero from '@/components/Hero';
-import ExperienceSkills from '@/components/ExperienceSkills';
-import Portfolio from '@/components/Portfolio';
-import Contact from '@/components/Contact';
-import CVTemplate from '@/components/CVTemplate';
+const BLUR_FADE_DELAY = 0.04;
 
-export default function Home() {
-  const [activeSection, setActiveSection] = useState('home');
-
-  const navLinks = React.useMemo(() => [
-    { id: 'home', label: 'Home' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'portfolio', label: 'Projects' },
-    { id: 'contact', label: 'Contact' }
-  ], []);
-
-  // High-reliability CV Download using a new window to ensure isolated styling
-  const handleDownloadCV = () => {
-    const cvElement = document.getElementById('printable-cv');
-    if (!cvElement) return;
-
-    const printWindow = window.open('', '_blank', 'width=800,height=1000');
-    if (!printWindow) {
-      alert('Please allow popups to download the CV');
-      return;
-    }
-
-    const cvHtml = cvElement.innerHTML;
-    
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>CV - Ilham Tegar Bintang Ananda</title>
-          <script src="https://cdn.tailwindcss.com"></script>
-          <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-            body { 
-              font-family: 'Inter', sans-serif; 
-              background: white !important; 
-              color: black !important;
-              margin: 0;
-              padding: 0;
-            }
-            #printable-cv { display: block !important; }
-            @page { size: auto; margin: 20mm; }
-            @media print {
-              body { padding: 0; margin: 0; }
-              .no-print { display: none; }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="p-8">
-            ${cvHtml}
-          </div>
-          <script>
-            // Ensure tailwind is loaded before printing
-            setTimeout(() => {
-              window.print();
-              // Optional: window.close(); // Keep it open for a better user experience on some browsers
-            }, 500);
-          </script>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-  };
-
-  // Scroll spy effect to update active section on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = navLinks.map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 100;
-
-      sections.forEach((section, index) => {
-        if (section && scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
-          setActiveSection(navLinks[index].id);
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [navLinks]);
-
+export default function Page() {
   return (
-    <main className="min-h-screen selection-primary">
-      {/* Top Navigation Bar */}
-      <header className="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
-        <nav className="flex justify-between items-center h-20 px-margin max-w-7xl mx-auto">
-          <div className="font-h2 text-h2 font-bold text-primary">Ilham Tegar</div>
-          
-          <div className="hidden md:flex items-center relative gap-8">
-            {navLinks.map((link) => (
-              <a 
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={() => setActiveSection(link.id)}
-                className={`relative py-2 text-label-caps font-label-caps transition-colors duration-300 ${
-                  activeSection === link.id ? 'text-primary' : 'text-secondary hover:text-primary'
-                }`}
-              >
-                {link.label}
-                {activeSection === link.id && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full animate-in fade-in slide-in-from-left-2 duration-300"></span>
-                )}
-              </a>
-            ))}
-          </div>
-
-          <a href="https://wa.link/x5uayn" target="_blank" className="active:scale-95 transition-transform duration-150 bg-primary text-on-primary px-6 py-2.5 rounded-xl font-label-caps text-label-caps shadow-sm hover:opacity-90">
-            HIRE ME
-          </a>
-        </nav>
-      </header>
-
-      {/* Hero & About Section */}
+    <main className="relative flex min-h-dvh flex-col gap-14">
       <section id="home">
-        <Hero onDownloadCV={handleDownloadCV} />
-      </section>
-
-      {/* Experience Section */}
-      <section id="experience" className="bg-surface border-t border-outline-variant/10">
-        <ExperienceSkills />
-      </section>
-
-      {/* Projects Section */}
-      <section id="portfolio" className="bg-background border-t border-outline-variant/10">
-        <Portfolio />
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="bg-surface border-t border-outline-variant/10">
-        <Contact />
-      </section>
-
-      {/* Footer */}
-      <footer className="w-full py-lg mt-xl bg-surface border-t border-outline-variant/30">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-xs px-margin max-w-7xl mx-auto">
-          <div className="text-center md:text-left">
-            <div className="font-label-caps text-label-caps text-secondary uppercase mb-unit">ILHAM TEGAR</div>
-            <p className="font-body-sm text-body-sm text-secondary opacity-80">
-              © 2024 Ilham Tegar Bintang Ananda. Engineering Excellence.
-            </p>
-          </div>
-          <div className="flex gap-6">
-            <a href="https://github.com/azumi99" target="_blank" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">GitHub</a>
-            <a href="https://allindonesian.com" target="_blank" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">Blog</a>
-            <a href="https://www.tiktok.com/@wb.kind" target="_blank" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">TikTok</a>
-            <a href="mailto:ilhambintang399@gmail.com" className="text-secondary font-body-sm text-body-sm hover:text-primary hover:underline transition-all duration-200">Email</a>
+        <div className="mx-auto w-full max-w-2xl space-y-8">
+          <div className="flex flex-col justify-between gap-2 gap-y-6 md:flex-row">
+            <div className="order-2 flex flex-col gap-2 md:order-1">
+              <BlurFadeText
+                delay={BLUR_FADE_DELAY}
+                className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
+                yOffset={8}
+                text={`Hi, I'm ${DATA.name.split(" ")[0]}`}
+              />
+              <BlurFadeText
+                className="max-w-[600px] text-on-surface-variant md:text-lg lg:text-xl"
+                delay={BLUR_FADE_DELAY}
+                text={DATA.description}
+              />
+            </div>
+            <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
+              <Avatar className="size-24 rounded-full border shadow-lg ring-4 ring-outline-variant/20 md:size-32">
+                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                <AvatarFallback>{DATA.initials}</AvatarFallback>
+              </Avatar>
+            </BlurFade>
           </div>
         </div>
-      </footer>
+      </section>
 
-      {/* Hidden CV template used as a data source for the print window */}
-      <div className="hidden">
-        <CVTemplate isForcedVisible={true} />
-      </div>
+      <section id="about">
+        <div className="flex min-h-0 flex-col gap-y-4">
+          <BlurFade delay={BLUR_FADE_DELAY * 3}>
+            <h2 className="text-xl font-bold">About</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 4}>
+            <div className="max-w-full text-pretty font-sans leading-relaxed text-on-surface-variant">
+              {DATA.summary}
+            </div>
+          </BlurFade>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div className="flex min-h-0 flex-col gap-y-6">
+          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+            <h2 className="text-xl font-bold">Work Experience</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 6}>
+            <WorkSection />
+          </BlurFade>
+        </div>
+      </section>
+
+      <section id="education">
+        <div className="flex min-h-0 flex-col gap-y-6">
+          <BlurFade delay={BLUR_FADE_DELAY * 7}>
+            <h2 className="text-xl font-bold">Education</h2>
+          </BlurFade>
+          <div className="flex flex-col gap-8">
+            {DATA.education.map((education, index) => (
+              <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 8 + index * 0.05}>
+                <Link href={education.href} className="group flex items-center justify-between gap-x-3">
+                  <div className="flex min-w-0 flex-1 items-center gap-x-3">
+                    {education.logoUrl ? (
+                      <img src={education.logoUrl} alt={education.school} className="size-8 flex-none overflow-hidden rounded-full border object-contain p-1 shadow ring-2 ring-outline-variant/20 md:size-10" />
+                    ) : (
+                      <div className="size-8 flex-none rounded-full border bg-surface-container shadow ring-2 ring-outline-variant/20 md:size-10" />
+                    )}
+                    <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                      <div className="flex items-center gap-2 font-semibold leading-none">
+                        {education.school}
+                        {education.href !== "#" && <ArrowUpRight className="h-3.5 w-3.5 -translate-x-2 text-on-surface-variant opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" aria-hidden />}
+                      </div>
+                      <div className="font-sans text-sm text-on-surface-variant">{education.degree}</div>
+                    </div>
+                  </div>
+                  <div className="flex flex-none items-center gap-1 text-right text-xs tabular-nums text-on-surface-variant">
+                    <span>{education.start} - {education.end}</span>
+                  </div>
+                </Link>
+              </BlurFade>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div className="flex min-h-0 flex-col gap-y-4">
+          <BlurFade delay={BLUR_FADE_DELAY * 9}>
+            <h2 className="text-xl font-bold">Skills</h2>
+          </BlurFade>
+          <div className="flex flex-wrap gap-2">
+            {DATA.skills.map((skill, id) => (
+              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
+                <div className="flex h-8 w-fit items-center gap-2 rounded-xl border border-outline-variant bg-background px-4 ring-2 ring-outline-variant/20">
+                  <skill.icon className="size-4 text-primary" aria-hidden />
+                  <span className="text-sm font-medium text-on-surface">{skill.name}</span>
+                </div>
+              </BlurFade>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio">
+        <BlurFade delay={BLUR_FADE_DELAY * 11}>
+          <ProjectsSection />
+        </BlurFade>
+      </section>
+
+      <section id="contact">
+        <BlurFade delay={BLUR_FADE_DELAY * 16}>
+          <ContactSection />
+        </BlurFade>
+      </section>
     </main>
   );
 }

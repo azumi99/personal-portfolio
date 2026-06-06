@@ -1,6 +1,9 @@
 'use client';
 
 import React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
 const experiences = [
   {
@@ -29,56 +32,55 @@ const experiences = [
 const ExperienceSkills: React.FC = () => {
   return (
     <div className="py-xl">
-      <section className="max-w-7xl mx-auto px-margin mb-xl">
-        <div className="max-w-4xl">
-          <h1 className="font-display text-display text-on-surface mb-sm">Professional Journey & Expertise</h1>
+      <section className="mx-auto max-w-3xl px-margin mb-xl">
+        <div>
+          <h1 className="font-display text-display text-on-surface mb-sm">Work Experience</h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
             From technical infrastructure to specialized mobile development. My path is driven by a curiosity for how things work and a passion for building robust solutions.
           </p>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-margin grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-xl px-margin">
         {/* Experience Timeline */}
-        <section className="lg:col-span-8">
-          <div className="flex items-center gap-3 mb-lg">
-            <span className="material-symbols-outlined text-primary">work</span>
-            <h2 className="font-h1 text-h1 text-on-surface">Experience</h2>
-          </div>
-          <div className="space-y-xl relative pl-8 timeline-line">
+        <section>
+          <div className="space-y-md">
             {experiences.map((exp, index) => (
-              <div key={index} className="group relative">
-                <div className="absolute -left-[35.5px] top-2 w-3 h-3 rounded-full bg-outline-variant border-2 border-surface z-10 group-hover:bg-primary transition-colors"></div>
-                <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                  <div>
-                    <h3 className="font-h2 text-h2 text-on-surface">{exp.role}</h3>
-                    <p className="text-primary font-semibold">{exp.company}</p>
+              <Card key={index} className="metric-card">
+                <CardHeader>
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-sm">
+                    <div>
+                      <CardTitle>{exp.role}</CardTitle>
+                      <p className="text-primary font-semibold">{exp.company}</p>
+                    </div>
+                    <Badge variant="outline" className="w-fit uppercase">{exp.period}</Badge>
                   </div>
-                  <span className="inline-block mt-2 md:mt-0 font-label-caps text-label-caps text-on-surface-variant uppercase">{exp.period}</span>
-                </div>
-                <p className="text-on-surface-variant mb-md leading-relaxed max-w-3xl">
-                  {exp.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {exp.tech.map((t) => (
-                    <span key={t} className="px-3 py-1 bg-surface-container-low text-primary border border-outline-variant/30 rounded-full text-label-caps">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-on-surface-variant mb-md leading-relaxed max-w-3xl">
+                    {exp.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {exp.tech.map((t) => (
+                      <Badge key={t} variant="soft">{t}</Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </section>
 
         {/* Skills Aside */}
-        <aside className="lg:col-span-4 space-y-lg">
-          <div className="border border-outline-variant/30 p-md rounded-xl bg-surface-container-lowest sticky top-28">
-            <div className="flex items-center gap-3 mb-md">
-              <span className="material-symbols-outlined text-primary">terminal</span>
-              <h2 className="font-h2 text-h2 text-on-surface">Technical Stack</h2>
-            </div>
-            <div className="space-y-lg">
+        <aside className="space-y-lg">
+          <Card className="metric-card">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-primary">terminal</span>
+                <CardTitle>Technical Stack</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-lg">
               <div>
                 <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">Core Proficiency</p>
                 <div className="grid grid-cols-2 gap-3">
@@ -88,9 +90,11 @@ const ExperienceSkills: React.FC = () => {
                     { name: 'Next.js' },
                     { name: 'Filament' }
                   ].map((skill) => (
-                    <div key={skill.name} className="px-4 py-3 bg-surface-container-low rounded-lg flex items-center justify-center border border-outline-variant/10">
+                    <Card key={skill.name} size="sm" className="bg-surface-container-low border-outline-variant/10 shadow-none">
+                      <CardContent className="flex items-center justify-center">
                       <span className="font-semibold text-primary">{skill.name}</span>
-                    </div>
+                      </CardContent>
+                    </Card>
                   ))}
                 </div>
               </div>
@@ -105,10 +109,10 @@ const ExperienceSkills: React.FC = () => {
                       { icon: 'router', name: 'MikroTik' },
                       { icon: 'settings_ethernet', name: 'Networking' }
                     ].map((item) => (
-                    <span key={item.name} className="px-3 py-1.5 bg-surface-container text-on-surface-variant rounded-md font-body-sm flex items-center gap-1.5">
+                    <Badge key={item.name} variant="outline" className="rounded-md bg-surface-container font-body-sm normal-case tracking-normal">
                       <span className="material-symbols-outlined text-[16px]">{item.icon}</span>
                       {item.name}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -124,10 +128,10 @@ const ExperienceSkills: React.FC = () => {
                     { icon: 'terminal', name: 'OpenClaw' },
                     { icon: 'model_training', name: 'Z.ai' }
                   ].map((ai) => (
-                    <span key={ai.name} className="px-3 py-1.5 bg-surface-container text-on-surface-variant rounded-md font-body-sm flex items-center gap-1.5">
+                    <Badge key={ai.name} variant="outline" className="rounded-md bg-surface-container font-body-sm normal-case tracking-normal">
                       <span className="material-symbols-outlined text-[16px]">{ai.icon}</span>
                       {ai.name}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -140,14 +144,15 @@ const ExperienceSkills: React.FC = () => {
                     { icon: 'data_object', name: 'SQLite' },
                     { icon: 'cloud_done', name: 'Supabase' }
                   ].map((db) => (
-                    <span key={db.name} className="px-3 py-1.5 bg-surface-container text-on-surface-variant rounded-md font-body-sm flex items-center gap-1.5">
+                    <Badge key={db.name} variant="outline" className="rounded-md bg-surface-container font-body-sm normal-case tracking-normal">
                       <span className="material-symbols-outlined text-[16px]">{db.icon}</span>
                       {db.name}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               </div>
-              <div className="pt-md border-t border-outline-variant/30">
+              <div className="pt-md">
+                <Separator className="mb-md" />
                 <p className="font-label-caps text-label-caps text-on-surface-variant uppercase mb-4">Education</p>
                 <div className="space-y-4">
                   <div>
@@ -162,8 +167,8 @@ const ExperienceSkills: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </aside>
       </div>
     </div>

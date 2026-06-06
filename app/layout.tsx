@@ -1,15 +1,27 @@
+import Navbar from "@/components/navbar";
+import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { DATA } from "@/data/resume";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Ilham Tegar Bintang Ananda - Mobile Developer Portfolio",
-  description: "Portfolio of Ilham Tegar Bintang Ananda, a Mobile Developer specializing in React Native, Laravel, and modern web technologies",
+  title: DATA.name,
+  description: DATA.description,
 };
 
 export default function RootLayout({
@@ -20,14 +32,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
-      <body
-        className={`${inter.variable} antialiased font-sans`}
-      >
-        {children}
+      <body className={cn("relative min-h-screen bg-background font-sans antialiased", geist.variable, geistMono.variable)}>
+        <TooltipProvider delayDuration={0}>
+          <div className="absolute inset-x-0 top-0 z-0 h-[100px] overflow-hidden">
+            <FlickeringGrid
+              className="h-full w-full"
+              squareSize={2}
+              gridGap={2}
+              style={{
+                maskImage: "linear-gradient(to bottom, black, transparent)",
+                WebkitMaskImage: "linear-gradient(to bottom, black, transparent)",
+              }}
+            />
+          </div>
+          <div className="relative z-10 mx-auto max-w-2xl px-6 py-12 pb-24 sm:py-24">{children}</div>
+          <Navbar />
+        </TooltipProvider>
       </body>
     </html>
   );

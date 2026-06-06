@@ -2,6 +2,11 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { TabsList } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 const projects = [
   {
@@ -134,8 +139,9 @@ const projects = [
     title: 'FSM - Field Service Management',
     category: 'APP',
     tech: 'RN EXPO CUSTOM CLIENT',
-    desc: 'Offline-first mobile application for field installers to manage TV distribution in Indonesia\'s remotest areas, featuring automated background photo and data synchronization.',
-    img: '/assets/img/fsm-field-service-management.png'
+    desc: 'Offline-first Expo mobile app for remote field installers, with background photo sync, installation tracking, and dashboard integration.',
+    img: '/assets/img/fsm-field-service-management.png',
+    featured: true
   },
   {
     title: 'FSM - Distribution & Installation Dashboard',
@@ -153,56 +159,78 @@ const Portfolio: React.FC = () => {
     ? projects 
     : projects.filter(project => project.category === activeFilter);
 
+  const sortedProjects = [...filteredProjects].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+
   const filterButtons = ['ALL', 'APP', 'WEB', 'WORDPRESS', 'N8N'];
 
   return (
     <div className="py-xl">
-      <section className="max-w-7xl mx-auto px-margin mb-xl text-center md:text-left">
-        <h1 className="font-display text-display text-on-surface mb-xs tracking-tight">Featured Projects</h1>
-        <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">A specialized collection of mobile applications and backend systems engineered for corporate efficiency and digital growth.</p>
+      <section className="mx-auto max-w-3xl px-margin mb-lg text-center">
+        <Badge variant="soft" className="mb-sm w-fit">My Projects</Badge>
+        <h1 className="font-display text-display text-on-surface mb-xs tracking-tight">Check out my latest work</h1>
+        <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          I&apos;ve worked on mobile apps, dashboards, automation workflows, and web systems for business operations.
+        </p>
       </section>
 
-      <section className="max-w-7xl mx-auto px-margin mb-md flex flex-wrap gap-xs justify-center md:justify-start">
-        {filterButtons.map((filter) => (
-          <button 
-            key={filter}
-            onClick={() => setActiveFilter(filter)}
-            className={`px-6 py-2 rounded-full font-label-caps text-label-caps border transition-all duration-300 ${
-              activeFilter === filter 
-                ? 'bg-primary text-on-primary border-primary shadow-md' 
-                : 'bg-surface-container-lowest text-secondary border-outline-variant/30 hover:border-primary/50 hover:bg-primary-fixed/10'
-            }`}
-          >
-            {filter === 'ALL' ? 'ALL PROJECTS' : filter}
-          </button>
-        ))}
+      <section className="mx-auto max-w-3xl px-margin mb-lg flex justify-center">
+        <TabsList>
+          {filterButtons.map((filter) => (
+            <Button
+              key={filter}
+              type="button"
+              onClick={() => setActiveFilter(filter)}
+              variant={activeFilter === filter ? 'default' : 'ghost'}
+              size="sm"
+              className={activeFilter === filter ? 'shadow-primary/20' : ''}
+            >
+              {filter === 'ALL' ? 'ALL PROJECTS' : filter}
+            </Button>
+          ))}
+        </TabsList>
       </section>
 
-      <section className="max-w-7xl mx-auto px-margin grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg min-h-[400px]">
-        {filteredProjects.map((project, index) => (
-          <article 
+      <section className="mx-auto grid max-w-5xl grid-cols-1 gap-5 px-margin md:grid-cols-2 min-h-[400px]">
+        {sortedProjects.map((project, index) => (
+          <Card
             key={project.title + index} 
-            className="project-card animate-in fade-in slide-in-from-bottom-4 duration-500 group bg-surface-container-lowest rounded-xl border border-outline-variant/20 overflow-hidden flex flex-col"
+            className={cn(
+              'project-card animate-in fade-in slide-in-from-bottom-4 duration-500 group overflow-hidden flex flex-col',
+              project.featured
+                ? 'border-primary/20 bg-white shadow-md md:col-span-2'
+                : 'metric-card'
+            )}
             style={{ animationDelay: `${index * 50}ms` }}
           >
-            <div className="aspect-video bg-surface-container overflow-hidden">
+            <div className={cn('relative overflow-hidden bg-surface-container', project.featured ? 'aspect-[16/9] md:aspect-[2.4/1]' : 'aspect-video')}>
+              <div className="absolute inset-0 z-[1] bg-gradient-to-t from-on-surface/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              {project.featured && (
+                <div className="absolute left-4 top-4 z-10">
+                  <Badge>FEATURED APP</Badge>
+                </div>
+              )}
               <Image 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                className={cn(
+                  'w-full h-full group-hover:scale-105 transition-transform duration-700',
+                  project.featured ? 'object-cover object-center' : 'object-cover'
+                )}
                 alt={project.title} 
                 src={project.img}
                 width={600}
                 height={340}
               />
             </div>
-            <div className="p-lg flex flex-col flex-grow">
-              <div className="flex gap-2 mb-sm">
-                <span className="px-2.5 py-0.5 bg-primary/5 text-primary rounded text-label-caps font-bold">{project.category}</span>
-                <span className="px-2.5 py-0.5 bg-secondary-container text-on-secondary-container rounded text-label-caps font-bold">{project.tech}</span>
+            <CardHeader className="pb-sm">
+              <div className="flex flex-wrap gap-2 mb-xs">
+                <Badge variant="soft">{project.category}</Badge>
+                <Badge variant="secondary">{project.tech}</Badge>
               </div>
-              <h3 className="font-h2 text-h2 text-on-surface mb-xs leading-tight">{project.title}</h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant mb-md flex-grow">{project.desc}</p>
-            </div>
-          </article>
+              <CardTitle className={project.featured ? 'text-[28px]' : ''}>{project.title}</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-grow flex-col">
+              <CardDescription className="mb-md flex-grow leading-relaxed">{project.desc}</CardDescription>
+            </CardContent>
+          </Card>
         ))}
       </section>
     </div>
