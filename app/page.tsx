@@ -10,6 +10,7 @@ import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
+const SKILL_CATEGORIES = ["Framework & App", "CMS & Backend", "AI Agent & Automation", "Database & Cloud", "Infrastructure & Ops"];
 
 export default function Page() {
   return (
@@ -102,15 +103,26 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">Skills</h2>
           </BlurFade>
-          <div className="flex flex-wrap gap-2">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <div className="flex h-8 w-fit items-center gap-2 rounded-xl border border-outline-variant bg-background px-4 ring-2 ring-outline-variant/20">
-                  <skill.icon className="size-4 text-primary" aria-hidden />
-                  <span className="text-sm font-medium text-on-surface">{skill.name}</span>
-                </div>
-              </BlurFade>
-            ))}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {SKILL_CATEGORIES.map((category, categoryIndex) => {
+              const skills = DATA.skills.filter((skill) => skill.category === category);
+
+              return (
+                <BlurFade key={category} delay={BLUR_FADE_DELAY * 10 + categoryIndex * 0.05}>
+                  <div className="flex h-full flex-col gap-3 rounded-xl border border-outline-variant bg-background p-4 ring-2 ring-outline-variant/20">
+                    <h3 className="text-sm font-semibold text-primary">{category}</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {skills.map((skill) => (
+                        <div key={skill.name} className="flex h-8 w-fit items-center gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest px-3">
+                          <skill.icon className="size-4 text-primary" aria-hidden />
+                          <span className="text-sm font-medium text-on-surface">{skill.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </BlurFade>
+              );
+            })}
           </div>
         </div>
       </section>
