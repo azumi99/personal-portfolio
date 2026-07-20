@@ -297,6 +297,20 @@ export const DATA = {
       video: "",
     },
     {
+      title: "RMS Rate Management System",
+      category: "WEB",
+      tech: "ERPNext",
+      href: "#",
+      dates: "2026",
+      active: true,
+      description:
+        "Master RMS system in ERPNext for managing Transys rate data and CRM-related pricing workflows.",
+      technologies: ["ERPNext", "Rate Management", "CRM", "Master Data"],
+      links: [],
+      image: "/assets/img/rms.png",
+      video: "",
+    },
+    {
       title: "FedEx Monitoring Service",
       category: "APP",
       tech: "REACT NATIVE",
