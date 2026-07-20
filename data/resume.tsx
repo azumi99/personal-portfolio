@@ -213,6 +213,20 @@ export const DATA = {
       video: "",
     },
     {
+      title: "AI QC Firstmile Lastmile OCR",
+      category: "WEB",
+      tech: "AI OCR & N8N",
+      href: "#",
+      dates: "2026",
+      active: true,
+      description:
+        "AI QC monitoring dashboard for Firstmile and Lastmile OCR classification, tracking processed data, n8n workflow execution, AI server usage, and processed data visibility.",
+      technologies: ["AI OCR", "Classification", "n8n", "Monitoring"],
+      links: [],
+      image: "/assets/img/ai-qc-firstmile-lastmile-ocr.png",
+      video: "",
+    },
+    {
       title: "AWB OCR Management Dashboard",
       category: "WEB",
       tech: "LARAVEL FILAMENT",
