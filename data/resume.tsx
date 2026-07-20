@@ -215,7 +215,7 @@ export const DATA = {
     {
       title: "AI QC Firstmile Lastmile OCR",
       category: "WEB",
-      tech: "AI OCR & N8N",
+      tech: "N8N",
       href: "#",
       dates: "2026",
       active: true,
