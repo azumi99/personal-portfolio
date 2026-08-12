@@ -40,7 +40,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
       <section className="mb-6">
         <h2 className="text-[14pt] font-bold uppercase border-b border-gray-300 mb-2">Professional Summary</h2>
         <p className="text-[11pt]">
-          I have 3 years of experience in IT Support and transitioned into a Mobile Developer role in December 2022. I recently earned my Bachelor's degree in Information Systems from Universitas Bina Sarana Informatika. I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Filament dashboards, automation workflows, and business systems that support real operations.
+          I have 3 years of experience in IT Support and transitioned into a Mobile Developer role in December 2022. I recently earned my Bachelor&apos;s degree in Information Systems from Universitas Bina Sarana Informatika. I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Filament dashboards, automation workflows, and business systems that support real operations.
         </p>
       </section>
 
