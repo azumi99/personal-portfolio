@@ -109,11 +109,11 @@ export default function Page() {
 
               return (
                 <BlurFade key={category} delay={BLUR_FADE_DELAY * 10 + categoryIndex * 0.05}>
-                  <div className="flex h-full flex-col gap-3 rounded-xl border border-outline-variant bg-background p-4 ring-2 ring-outline-variant/20">
+                  <div className="flex h-full flex-col gap-3 rounded-xl border border-outline-variant/50 bg-background p-4">
                     <h3 className="text-sm font-semibold text-primary">{category}</h3>
                     <div className="flex flex-wrap gap-2">
                       {skills.map((skill) => (
-                        <div key={skill.name} className="flex h-8 w-fit items-center gap-2 rounded-xl border border-outline-variant bg-surface-container-lowest px-3">
+                        <div key={skill.name} className="flex h-8 w-fit items-center gap-2 rounded-xl border border-outline-variant/50 bg-surface-container-lowest px-3">
                           <skill.icon className="size-4 text-primary" aria-hidden />
                           <span className="text-sm font-medium text-on-surface">{skill.name}</span>
                         </div>
