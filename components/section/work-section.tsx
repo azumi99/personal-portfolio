@@ -19,7 +19,7 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
 
 export default function WorkSection() {
   return (
-    <Accordion type="single" collapsible className="grid w-full gap-6">
+    <Accordion type="single" collapsible defaultValue={DATA.work.length ? `${DATA.work[0].company}-${DATA.work[0].title}` : undefined} className="grid w-full gap-6">
       {DATA.work.map((work) => (
         <AccordionItem key={`${work.company}-${work.title}`} value={`${work.company}-${work.title}`} className="grid w-full gap-2 border-b-0">
           <AccordionTrigger className="cursor-pointer rounded-none p-0 transition-colors hover:no-underline group [&>svg]:hidden">
@@ -43,7 +43,15 @@ export default function WorkSection() {
             </div>
           </AccordionTrigger>
           <AccordionContent className="ml-13 p-0 text-xs text-on-surface-variant sm:text-sm">
-            {work.description}
+            {"points" in work && work.points ? (
+              <ul className="list-disc space-y-1 pl-4 sm:space-y-1.5">
+                {(work.points as readonly string[]).map((point, i) => (
+                  <li key={i} className="leading-relaxed">{point}</li>
+                ))}
+              </ul>
+            ) : (
+              work.description
+            )}
           </AccordionContent>
         </AccordionItem>
       ))}

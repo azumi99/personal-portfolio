@@ -30,7 +30,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className={cn("relative min-h-screen bg-background font-sans antialiased", poppins.variable)}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <TooltipProvider delayDuration={0}>
             <div className="absolute inset-x-0 top-0 z-0 h-[100px] overflow-hidden">
               <FlickeringGrid

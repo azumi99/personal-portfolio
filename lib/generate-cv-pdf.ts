@@ -2,7 +2,21 @@ type PdfLine = {
   text: string;
   size: number;
   bold?: boolean;
+  date?: string;
+  boldPrefix?: string;
 };
+
+function estimateTextWidth(text: string, size: number, bold: boolean) {
+  let width = 0;
+  for (const ch of text) {
+    if (ch === " " || ch === "." || ch === ",") width += bold ? 0.33 : 0.28;
+    else if (ch === "i" || ch === "l" || ch === "1" || ch === "(" || ch === ")") width += bold ? 0.33 : 0.28;
+    else if (ch === "f" || ch === "t" || ch === "I") width += bold ? 0.38 : 0.33;
+    else if (ch === "r" || ch === "j") width += bold ? 0.38 : 0.33;
+    else width += bold ? 0.6 : 0.5;
+  }
+  return width * size;
+}
 
 function wrapText(text: string, maxLength: number) {
   if (!text) return [""];
@@ -39,47 +53,48 @@ function padOffset(offset: number) {
 
 export function generateCvPdf(portfolioUrl: string) {
   const lines: PdfLine[] = [
-    { text: "ILHAM TEGAR BINTANG ANANDA", size: 20, bold: true },
-    { text: "Tangerang Selatan, Indonesia | +62 822 5111 6009 | ilhambintang399@gmail.com", size: 10 },
-    { text: `Portfolio: ${portfolioUrl}`, size: 10 },
-    { text: "", size: 10 },
-    { text: "PROFESSIONAL SUMMARY", size: 13, bold: true },
+    { text: "ILHAM TEGAR BINTANG ANANDA", size: 18, bold: true },
+    { text: "Tangerang Selatan, Indonesia | +62 822 5111 6009 | ilhambintang399@gmail.com", size: 9 },
+    { text: ` ${portfolioUrl}`, size: 9, boldPrefix: "Portfolio:" },
+    { text: "", size: 8 },
+    { text: "PROFESSIONAL SUMMARY", size: 11, bold: true },
     {
-      text: "Professional Mobile Developer with over 6 years of experience in the IT industry. Transitioned from IT Support to Development in 2022, specializing in React Native and Laravel API integration. Recently earned a Bachelor degree in Information Systems. Proven track record in building complex automation workflows, OCR systems, and ERP data management platforms.",
-      size: 10,
+      text: "Mobile Developer with 3 years of IT Support experience, transitioning into development in December 2022. Earned a Bachelor's degree in Information Systems from Universitas Bina Sarana Informatika. Specializes in cross-platform mobile apps (React Native, Expo), Laravel API integrations, Filament dashboards, automation workflows, and business systems supporting real operations.",
+      size: 9,
     },
-    { text: "", size: 10 },
-    { text: "TECHNICAL SKILLS", size: 13, bold: true },
-    { text: "Core: React Native, Expo, Laravel, Next.js, Filament", size: 10 },
-    { text: "Ecosystem: OpenAI, ERPNext, Frappe, Firebase, WordPress, MikroTik, Networking", size: 10 },
-    { text: "AI & Agents: n8n, Claude Code, Antigravity, Gemini, Hermes, OpenClaw, Z.ai", size: 10 },
-    { text: "Databases: MySQL, PostgreSQL, SQLite, Supabase", size: 10 },
-    { text: "", size: 10 },
-    { text: "PROFESSIONAL EXPERIENCE", size: 13, bold: true },
-    { text: "Mobile Developer | ATT Group, Jakarta Barat | Dec 2022 - Present", size: 11, bold: true },
-    {
-      text: "Developing and maintaining mobile projects including HRIS, Wakita apps, CRM, FedEx Monitoring, and FSM. Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR. Built AWB OCR Management Dashboard with Filament, Transys Master Data with ERPNext, and offline-first React Native installer apps with background photo synchronization.",
-      size: 10,
-    },
-    { text: "IT Support Specialist | ATT Group, Jakarta Barat | 2019 - 2022", size: 11, bold: true },
-    {
-      text: "Responsible for technical support, network installation, hardware maintenance, VMware ESXi, Synology NAS infrastructure, SEO, and internal WordPress profile development.",
-      size: 10,
-    },
-    { text: "IT Support | SMKN 1 Simpang Pematang, Lampung | 2018 - 2019", size: 11, bold: true },
-    {
-      text: "Handled school IT infrastructure, computer labs, server preparation for exams, PCs, printers, and networking equipment.",
-      size: 10,
-    },
-    { text: "", size: 10 },
-    { text: "EDUCATION", size: 13, bold: true },
-    { text: "Bachelor of Information Systems (S1) | Universitas Bina Sarana Informatika | 2020 - 2024", size: 10, bold: true },
-    { text: "Teknik Komputer Jaringan | SMKN 1 Simpang Pematang | 2016 - 2018", size: 10 },
-    { text: "", size: 10 },
-    { text: "SELECTED PROJECTS", size: 13, bold: true },
+    { text: "", size: 8 },
+    { text: "TECHNICAL SKILLS", size: 11, bold: true },
+    { text: " React Native, Expo, Laravel, Filament, Next.js", size: 9, boldPrefix: "Framework & App:" },
+    { text: " WordPress, ERPNext, Frappe", size: 9, boldPrefix: "CMS & Backend:" },
+    { text: " n8n, Claude Code, Antigravity, OpenClaw, Hermes", size: 9, boldPrefix: "AI Agent & Automation:" },
+    { text: " MySQL, PostgreSQL, SQLite, Supabase, Firebase", size: 9, boldPrefix: "Databases & Cloud:" },
+    { text: " MikroTik, Networking, VMware ESXi, Synology NAS", size: 9, boldPrefix: "Infrastructure & Ops:" },
+    { text: "", size: 8 },
+    { text: "PROFESSIONAL EXPERIENCE", size: 11, bold: true },
+    { text: "Mobile Developer | ATT Group, Jakarta Barat", size: 10, bold: true, date: "Dec 2022 - Present" },
+    { text: "- Developed and maintained mobile projects: HRIS, Wakita apps, CRM, FedEx Monitoring Service, and FSM.", size: 9 },
+    { text: "- Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR.", size: 9 },
+    { text: "- Built AWB OCR Management Dashboard with Filament, integrated with CRM via webhook synchronization.", size: 9 },
+    { text: "- Built Transys Master Data (ERPNext/Frappe) for logistics and geographical data, including RMS Rate Management and CRM integration.", size: 9 },
+    { text: "- Developed an offline-first React Native (Expo) installer app with automated background photo synchronization.", size: 9 },
+    { text: "- Implemented FSM distribution and installation dashboard (Laravel Filament) for nationwide TV distribution and school installation progress.", size: 9 },
+    { text: "", size: 8 },
+    { text: "IT Support Specialist | ATT Group, Jakarta Barat", size: 10, bold: true, date: "2019 - 2022" },
+    { text: "- Responsible for technical support, network installation, and hardware maintenance.", size: 9 },
+    { text: "- Specialized in virtualization using VMware ESXi and managed Synology NAS infrastructure.", size: 9 },
+    { text: "- Handled SEO and web development for internal corporate WordPress profiles.", size: 9 },
+    { text: "", size: 8 },
+    { text: "IT Support | SMKN 1 Simpang Pematang, Lampung", size: 10, bold: true, date: "2018 - 2019" },
+    { text: "- Handled school IT infrastructure, computer labs, server prep for exams, PCs, printers, and networking equipment.", size: 9 },
+    { text: "", size: 8 },
+    { text: "EDUCATION", size: 11, bold: true },
+    { text: "Bachelor of Information Systems (S1) | Universitas Bina Sarana Informatika", size: 9, bold: true, date: "2020 - 2024" },
+    { text: "Teknik Komputer Jaringan | SMKN 1 Simpang Pematang", size: 9, date: "2016 - 2018" },
+    { text: "", size: 8 },
+    { text: "SELECTED PROJECTS", size: 11, bold: true },
     {
       text: "FSM Field Service Management, FSM Dashboard, Lancar Business Finance Tracker, Intelligent OCR & CRM Automation, AWB OCR Management Dashboard, WP Auto AI Content SaaS, All Indonesian AI Media, WA Verification AI Automation, Transys Master Data ERPNext, FedEx Monitoring Service, Mobile CRM Transys, Logistika Mobile.",
-      size: 10,
+      size: 9,
     },
   ];
 
@@ -90,27 +105,60 @@ export function generateCvPdf(portfolioUrl: string) {
   let operations: string[] = [];
   let y = pageHeight - margin;
 
-  function addLine(text: string, size: number, bold = false) {
+  function addLine(text: string, size: number, bold = false, date?: string, boldPrefix?: string) {
     if (y < margin + 24) {
       pages.push(operations.join("\n"));
       operations = [];
       y = pageHeight - margin;
     }
 
-    const font = bold ? "F2" : "F1";
-    operations.push(`BT /${font} ${size} Tf ${margin} ${y} Td (${escapePdfText(text)}) Tj ET`);
-    y -= Math.ceil(size * 1.45);
-  }
-
-  for (const line of lines) {
-    const maxLength = line.size >= 13 ? 62 : 88;
-
-    for (const wrappedLine of wrapText(line.text, maxLength)) {
-      addLine(wrappedLine, line.size, line.bold);
+    if (boldPrefix) {
+      const prefixWidth = estimateTextWidth(boldPrefix, size, true) + 4;
+      operations.push(`BT /F2 ${size} Tf ${margin} ${y} Td (${escapePdfText(boldPrefix)}) Tj ET`);
+      operations.push(`BT /F1 ${size} Tf ${margin + prefixWidth} ${y} Td (${escapePdfText(text)}) Tj ET`);
+    } else {
+      const font = bold ? "F2" : "F1";
+      operations.push(`BT /${font} ${size} Tf ${margin} ${y} Td (${escapePdfText(text)}) Tj ET`);
     }
 
-    if (line.size >= 13) {
-      y -= 3;
+    if (date) {
+      const dateWidth = estimateTextWidth(date, size, bold);
+      const dateX = pageWidth - margin - dateWidth;
+      const font = bold ? "F2" : "F1";
+      operations.push(`BT /${font} ${size} Tf ${dateX} ${y} Td (${escapePdfText(date)}) Tj ET`);
+    }
+
+    y -= Math.ceil(size * 1.3);
+  }
+
+  function addSeparator(topOffset = 5, bottomMargin = 16) {
+    if (y < margin + 24) {
+      pages.push(operations.join("\n"));
+      operations = [];
+      y = pageHeight - margin;
+    }
+    const lineY = y + topOffset;
+    operations.push(`0.5 w ${margin} ${lineY} m ${pageWidth - margin} ${lineY} l S`);
+    y = lineY - bottomMargin;
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const isSectionHeader = line.size === 11 && line.bold;
+    const isHeaderBlock = i <= 3;
+
+    const maxLength = line.size >= 11 ? 68 : 95;
+    const wrapped = wrapText(line.text, maxLength);
+
+    for (let w = 0; w < wrapped.length; w++) {
+      const isLastWrap = w === wrapped.length - 1;
+      addLine(wrapped[w], line.size, line.bold, isLastWrap ? line.date : undefined, line.boldPrefix);
+    }
+
+    if (isSectionHeader) {
+      addSeparator();
+    } else if (isHeaderBlock && i === 3) {
+      addSeparator(10, 24);
     }
   }
 

@@ -110,7 +110,15 @@ export const DATA = {
       start: "Dec 2022",
       end: "Present",
       description:
-        "Developing and maintaining mobile projects including HRIS, Wakita apps, CRM, FedEx Monitoring Service, and FSM. Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR. Built AWB OCR Management Dashboard with Filament, Transys Master Data with ERPNext, and an offline-first React Native installer app with background photo synchronization.",
+        "Developing and maintaining mobile projects including HRIS, Wakita apps, CRM, FedEx Monitoring Service, and FSM. Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR. Built AWB OCR Management Dashboard with Filament, Transys Master Data with ERPNext (RMS Rate Management & CRM integration), and an offline-first React Native installer app with background photo synchronization.",
+      points: [
+        "Developed and maintained mobile projects including HRIS, Wakita apps, CRM, FedEx Monitoring Service, and FSM",
+        "Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR",
+        "Built AWB OCR Management Dashboard with Filament and integrated it with CRM via webhook synchronization",
+        "Built Transys Master Data management system with ERPNext (Frappe Framework) for logistics and geographical data, including RMS Rate Management and CRM integration",
+        "Developed an offline-first React Native (Expo) installer app for remote field installations with automated background photo synchronization",
+        "Implemented the FSM distribution and installation dashboard using Laravel Filament to monitor nationwide TV distribution and school installation progress",
+      ],
     },
     {
       company: "ATT Group",
@@ -157,10 +165,30 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "ATT Mobile Tracking",
+      category: "APP",
+      tech: "EXPO (REACT NATIVE)",
+      href: "https://play.google.com/store/apps/details?id=com.att.tracking",
+      dates: "2026",
+      active: true,
+      description:
+        "Expo-based mobile application for container truck drivers to manage delivery tasks, track timeline progress, and provide real-time background location tracking.",
+      technologies: ["React Native", "Expo", "Background Location", "Task Management", "Real-time Tracking"],
+      links: [
+        {
+          type: "Play Store",
+          href: "https://play.google.com/store/apps/details?id=com.att.tracking",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/assets/img/att-mobile-tracking.png",
+      video: "",
+    },
+    {
       title: "FSM - Field Service Management",
       category: "APP",
       tech: "RN EXPO CUSTOM CLIENT",
-      href: "#",
+      href: "https://play.google.com/store/apps/details?id=com.fsm.installer",
       dates: "2026",
       active: true,
       description:

@@ -40,7 +40,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
       <section className="mb-6">
         <h2 className="text-[14pt] font-bold uppercase border-b border-gray-300 mb-2">Professional Summary</h2>
         <p className="text-[11pt]">
-          Professional Mobile Developer with over 6 years of experience in the IT industry. Transitioned from IT Support to Development in 2022, specializing in React Native and Laravel API integration. Recently earned a Bachelor’s degree in Information Systems. Proven track record in building complex automation workflows, OCR systems, and large-scale ERP data management platforms.
+          I have 3 years of experience in IT Support and transitioned into a Mobile Developer role in December 2022. I recently earned my Bachelor's degree in Information Systems from Universitas Bina Sarana Informatika. I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Filament dashboards, automation workflows, and business systems that support real operations.
         </p>
       </section>
 
@@ -49,12 +49,13 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
         <h2 className="text-[14pt] font-bold uppercase border-b border-gray-300 mb-2">Technical Skills</h2>
         <div className="grid grid-cols-2 gap-x-8 text-[11pt]">
           <div>
-            <p><strong>Core:</strong> React Native, Laravel, Next.js, Filament</p>
+            <p><strong>Framework & App:</strong> React Native, Expo, Laravel, Filament, Next.js</p>
+            <p className="mt-1"><strong>CMS & Backend:</strong> WordPress, ERPNext, Frappe</p>
           </div>
           <div>
-            <p><strong>Ecosystem:</strong> OpenAI, ERPNext, Frappe, Expo, Firebase, WordPress, MikroTik, Networking</p>
-            <p className="mt-1"><strong>AI & Agents:</strong> n8n, Claude Code, Antigravity, Gemini, Hermes, OpenClaw, Z.ai</p>
-            <p className="mt-1"><strong>Databases:</strong> MySQL, PostgreSQL, SQLite, Supabase</p>
+            <p><strong>AI Agent & Automation:</strong> n8n, Claude Code, Antigravity, OpenClaw, Hermes</p>
+            <p className="mt-1"><strong>Databases & Cloud:</strong> MySQL, PostgreSQL, SQLite, Supabase, Firebase</p>
+            <p className="mt-1"><strong>Infrastructure & Ops:</strong> MikroTik, Networking, VMware ESXi, Synology NAS</p>
           </div>
         </div>
       </section>
@@ -71,10 +72,12 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
           </div>
           <p className="italic mb-1">ATT Group, Jakarta Barat</p>
           <ul className="list-disc ml-5 text-[11pt] space-y-1">
-            <li>Developing and maintaining mobile projects including HRIS, Wakita apps, CRM, and FedEx Monitoring.</li>
-            <li>Engineered advanced automation workflows with n8n & AI Agents for WhatsApp verification and Intelligent OCR.</li>
-            <li>Built AWB OCR Management Dashboard (Filament) and Transys Master Data system (ERPNext).</li>
-            <li>Developed comprehensive FSM (Field Service Management) system with offline-first React Native app for remote school installations, featuring automated background data and photo synchronization.</li>
+            <li>Developed and maintained mobile projects including HRIS, Wakita apps, CRM, FedEx Monitoring Service, and FSM.</li>
+            <li>Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR.</li>
+            <li>Built AWB OCR Management Dashboard with Filament and integrated it with CRM via webhook synchronization.</li>
+            <li>Built Transys Master Data management system with ERPNext (Frappe Framework) for logistics and geographical data, including RMS Rate Management and CRM integration.</li>
+            <li>Developed an offline-first React Native (Expo) installer app for remote field installations with automated background photo synchronization.</li>
+            <li>Implemented the FSM distribution and installation dashboard using Laravel Filament to monitor nationwide TV distribution and school installation progress.</li>
           </ul>
         </div>
 
@@ -110,10 +113,15 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
       <section>
         <h2 className="text-[14pt] font-bold uppercase border-b border-gray-300 mb-2">Education</h2>
         <div className="flex justify-between font-bold">
-          <h3>Bachelor of Information Systems (S1)</h3>
+          <h3>Bachelor of Information Systems (S1 Sistem Informasi)</h3>
           <span>2020 — 2024</span>
         </div>
-        <p className="italic">Universitas Bina Sarana Informatika</p>
+        <p className="italic mb-3">Universitas Bina Sarana Informatika</p>
+        <div className="flex justify-between font-bold">
+          <h3>Teknik Komputer Jaringan</h3>
+          <span>2016 — 2018</span>
+        </div>
+        <p className="italic">SMKN 1 Simpang Pematang, Lampung</p>
       </section>
     </div>
   );
