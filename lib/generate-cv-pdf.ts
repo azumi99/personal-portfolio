@@ -4,6 +4,7 @@ type PdfLine = {
   bold?: boolean;
   date?: string;
   boldPrefix?: string;
+  color?: string;
 };
 
 function estimateTextWidth(text: string, size: number, bold: boolean) {
@@ -55,7 +56,7 @@ export function generateCvPdf(portfolioUrl: string) {
   const lines: PdfLine[] = [
     { text: "ILHAM TEGAR BINTANG ANANDA", size: 18, bold: true },
     { text: "Tangerang Selatan, Indonesia | +62 822 5111 6009 | ilhambintang399@gmail.com", size: 9 },
-    { text: ` ${portfolioUrl}`, size: 9, boldPrefix: "Portfolio:" },
+    { text: ` ${portfolioUrl}`, size: 9, boldPrefix: "Portfolio:", color: "0.145 0.388 0.922" },
     { text: "", size: 8 },
     { text: "PROFESSIONAL SUMMARY", size: 11, bold: true },
     {
@@ -105,20 +106,23 @@ export function generateCvPdf(portfolioUrl: string) {
   let operations: string[] = [];
   let y = pageHeight - margin;
 
-  function addLine(text: string, size: number, bold = false, date?: string, boldPrefix?: string) {
+  function addLine(text: string, size: number, bold = false, date?: string, boldPrefix?: string, color?: string) {
     if (y < margin + 24) {
       pages.push(operations.join("\n"));
       operations = [];
       y = pageHeight - margin;
     }
 
+    const colorOp = color ? `${color} rg` : "";
+    const resetOp = color ? "0 0 0 rg" : "";
+
     if (boldPrefix) {
       const prefixWidth = estimateTextWidth(boldPrefix, size, true) + 4;
       operations.push(`BT /F2 ${size} Tf ${margin} ${y} Td (${escapePdfText(boldPrefix)}) Tj ET`);
-      operations.push(`BT /F1 ${size} Tf ${margin + prefixWidth} ${y} Td (${escapePdfText(text)}) Tj ET`);
+      operations.push(`BT /F1 ${size} Tf ${margin + prefixWidth} ${y} Td ${colorOp} (${escapePdfText(text)}) Tj ${resetOp} ET`);
     } else {
       const font = bold ? "F2" : "F1";
-      operations.push(`BT /${font} ${size} Tf ${margin} ${y} Td (${escapePdfText(text)}) Tj ET`);
+      operations.push(`BT /${font} ${size} Tf ${margin} ${y} Td ${colorOp} (${escapePdfText(text)}) Tj ${resetOp} ET`);
     }
 
     if (date) {
@@ -152,7 +156,7 @@ export function generateCvPdf(portfolioUrl: string) {
 
     for (let w = 0; w < wrapped.length; w++) {
       const isLastWrap = w === wrapped.length - 1;
-      addLine(wrapped[w], line.size, line.bold, isLastWrap ? line.date : undefined, line.boldPrefix);
+      addLine(wrapped[w], line.size, line.bold, isLastWrap ? line.date : undefined, line.boldPrefix, line.color);
     }
 
     if (isSectionHeader) {

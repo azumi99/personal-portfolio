@@ -32,7 +32,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
           <span>ilhambintang399@gmail.com</span>
         </div>
         <div className="text-[10pt] text-blue-700 mt-1 font-semibold">
-          Portfolio: {baseUrl}
+          Portfolio: <a href={baseUrl} target="_blank" rel="noopener noreferrer" style={{ color: "#2563eb" }} className="underline">{baseUrl}</a>
         </div>
       </header>
 
