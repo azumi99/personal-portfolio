@@ -110,8 +110,8 @@ const projects = [
   {
     title: 'AWB OCR Management Dashboard',
     category: 'WEB',
-    tech: 'LARAVEL FILAMENT',
-    desc: 'Professional admin panel built with Filament PHP for managing AWB OCR results, featuring webhook integration for CRM synchronization.',
+    tech: 'LARAVEL & NODE.JS',
+    desc: 'Professional admin panel built with Node.js for managing AWB OCR results, featuring webhook integration for CRM synchronization.',
     img: '/assets/img/ocr-admin-filament.png'
   },
   {
@@ -131,7 +131,7 @@ const projects = [
   {
     title: 'WP Auto - AI Content SaaS',
     category: 'WEB',
-    tech: 'LARAVEL FILAMENT & AI',
+    tech: 'LARAVEL, NODE.JS & AI',
     desc: 'Professional SaaS platform for automated AI content generation and multi-site WordPress management, featuring smart scheduling.',
     img: '/assets/img/wp-auto-saas.png'
   },
@@ -146,7 +146,7 @@ const projects = [
   {
     title: 'FSM - Distribution & Installation Dashboard',
     category: 'WEB',
-    tech: 'LARAVEL FILAMENT',
+    tech: 'LARAVEL & NODE.JS',
     desc: 'Comprehensive web-based Field Service Management platform for monitoring and managing the nationwide distribution and installation of interactive TVs in schools.',
     img: '/assets/img/fsm-dashboard.png'
   }

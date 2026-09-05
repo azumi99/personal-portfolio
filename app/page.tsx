@@ -7,6 +7,7 @@ import Link from "next/link";
 import ContactSection from "@/components/section/contact-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
+import WritingSection from "@/components/section/writing-section";
 import { ArrowUpRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -125,6 +126,15 @@ export default function Page() {
             })}
           </div>
         </div>
+      </section>
+
+      <section id="writing">
+        <BlurFade delay={BLUR_FADE_DELAY * 10}>
+          <div className="flex min-h-0 flex-col gap-y-6">
+            <h2 className="text-xl font-bold">Writing</h2>
+            <WritingSection />
+          </div>
+        </BlurFade>
       </section>
 
       <section id="portfolio">

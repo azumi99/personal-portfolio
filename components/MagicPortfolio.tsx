@@ -50,7 +50,7 @@ const skills = [
   'React Native',
   'Expo',
   'Laravel',
-  'Filament',
+  'Node.js',
   'Next.js',
   'WordPress',
   'Frappe',
@@ -88,7 +88,7 @@ const projects = [
     description:
       'Web-based Field Service Management dashboard for monitoring nationwide TV distribution and school installation progress.',
     image: '/assets/img/fsm-dashboard.png',
-    technologies: ['Laravel Filament', 'Dashboard', 'Operations'],
+    technologies: ['Laravel', 'Node.js', 'Dashboard', 'Operations'],
   },
   {
     title: 'Lancar - Business Finance Tracker',
@@ -113,9 +113,9 @@ const projects = [
     category: 'WEB',
     dates: '2026',
     description:
-      'Filament admin panel for managing AWB OCR results with webhook integration for CRM synchronization.',
+      'Node.js admin panel for managing AWB OCR results with webhook integration for CRM synchronization.',
     image: '/assets/img/ocr-admin-filament.png',
-    technologies: ['Laravel Filament', 'CRM', 'OCR'],
+    technologies: ['Laravel', 'Node.js', 'CRM', 'OCR'],
   },
   {
     title: 'WP Auto - AI Content SaaS',
@@ -124,7 +124,7 @@ const projects = [
     description:
       'SaaS platform for automated AI content generation and multi-site WordPress management with smart scheduling.',
     image: '/assets/img/wp-auto-saas.png',
-    technologies: ['Laravel Filament', 'AI', 'WordPress'],
+    technologies: ['Laravel', 'Node.js', 'AI', 'WordPress'],
   },
   {
     title: 'All Indonesian - AI Media',
@@ -232,7 +232,7 @@ export default function MagicPortfolio({ onDownloadCV }: MagicPortfolioProps) {
           <div className="order-2 flex flex-col gap-2 md:order-1">
             <h1 className="text-3xl font-semibold tracking-tighter text-on-surface sm:text-4xl lg:text-5xl">Hi, I&apos;m Ilham</h1>
             <p className="max-w-[600px] text-on-surface-variant md:text-lg lg:text-xl">
-              Mobile Apps Developer specializing in React Native, Expo, Laravel, Filament, and operational automation.
+              Mobile Apps Developer specializing in React Native, Expo, Laravel, Node.js, and operational automation.
             </p>
           </div>
           <div className="order-1 md:order-2">
@@ -259,7 +259,7 @@ export default function MagicPortfolio({ onDownloadCV }: MagicPortfolioProps) {
             I have 3 years of experience in IT Support and transitioned into a Mobile Developer role in December 2022. I recently earned my Bachelor&apos;s degree in Information Systems from Universitas Bina Sarana Informatika.
           </p>
           <p>
-            I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Filament dashboards, automation workflows, and business systems that support real operations.
+            I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Node.js services, automation workflows, and business systems that support real operations.
           </p>
         </div>
       </section>

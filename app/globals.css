@@ -9,49 +9,62 @@
   }
 
   .dark {
-    --background: #0f172a;
-    --foreground: #f8fafc;
+    --background: #121212;
+    --foreground: #fafafa;
   }
 
   .dark body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-[#121212] text-neutral-50;
   }
 
   .dark .bg-background,
   .dark .bg-surface,
   .dark .bg-surface-container-lowest {
-    @apply bg-slate-950;
+    @apply bg-[#121212];
   }
 
   .dark .bg-white,
-  .dark .bg-white\/90,
   .dark .bg-surface-container,
   .dark .bg-surface-container-low,
   .dark .bg-surface-container-high,
   .dark .bg-surface-container-highest,
   .dark .bg-primary-fixed,
   .dark .bg-secondary-container {
-    @apply bg-slate-900;
+    @apply bg-neutral-900;
+  }
+
+  /* Glassy dock like reference (muted/40 + backdrop blur) */
+  .dark .bg-white\/90 {
+    @apply bg-neutral-800/40;
   }
 
   .dark .text-on-background,
   .dark .text-on-surface,
   .dark .text-on-primary-fixed,
   .dark .text-on-secondary-container {
-    @apply text-slate-100;
+    @apply text-neutral-50;
   }
 
   .dark .text-on-surface-variant,
   .dark .text-secondary {
-    @apply text-slate-400;
+    @apply text-neutral-400;
   }
 
   .dark .text-primary {
-    @apply text-blue-300;
+    @apply text-neutral-200;
+  }
+
+  /* bg-primary is light in dark mode, so its text must be dark */
+  .dark .text-on-primary {
+    @apply text-neutral-900;
   }
 
   .dark .bg-primary {
-    @apply bg-blue-500;
+    @apply bg-neutral-200;
+  }
+
+  .dark .fill-primary {
+    @apply fill-neutral-200;
   }
 
   .dark .border,
@@ -59,7 +72,15 @@
   .dark .border-outline-variant\/20,
   .dark .border-outline-variant\/30,
   .dark .border-outline-variant\/40 {
-    @apply border-slate-700;
+    @apply border-white/10;
+  }
+
+  .dark .border-primary\/20 {
+    @apply border-white/15;
+  }
+
+  .dark .project-card:hover {
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
   }
 
   * {

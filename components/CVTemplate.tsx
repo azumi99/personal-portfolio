@@ -40,7 +40,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
       <section className="mb-6">
         <h2 className="text-[14pt] font-bold uppercase border-b border-gray-300 mb-2">Professional Summary</h2>
         <p className="text-[11pt]">
-          I have 3 years of experience in IT Support and transitioned into a Mobile Developer role in December 2022. I recently earned my Bachelor&apos;s degree in Information Systems from Universitas Bina Sarana Informatika. I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Filament dashboards, automation workflows, and business systems that support real operations.
+          I have 3 years of experience in IT Support and transitioned into a Mobile Developer role in December 2022. I recently earned my Bachelor&apos;s degree in Information Systems from Universitas Bina Sarana Informatika. I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Node.js services, automation workflows, and business systems that support real operations.
         </p>
       </section>
 
@@ -49,7 +49,7 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
         <h2 className="text-[14pt] font-bold uppercase border-b border-gray-300 mb-2">Technical Skills</h2>
         <div className="grid grid-cols-2 gap-x-8 text-[11pt]">
           <div>
-            <p><strong>Framework & App:</strong> React Native, Expo, Laravel, Filament, Next.js</p>
+            <p><strong>Framework & App:</strong> React Native, Expo, Laravel, Node.js, Next.js</p>
             <p className="mt-1"><strong>CMS & Backend:</strong> WordPress, ERPNext, Frappe</p>
           </div>
           <div>
@@ -74,10 +74,10 @@ const CVTemplate: React.FC<CVTemplateProps> = ({ isForcedVisible }) => {
           <ul className="list-disc ml-5 text-[11pt] space-y-1">
             <li>Developed and maintained mobile projects including HRIS, Wakita apps, CRM, FedEx Monitoring Service, and FSM.</li>
             <li>Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR.</li>
-            <li>Built AWB OCR Management Dashboard with Filament and integrated it with CRM via webhook synchronization.</li>
+            <li>Built AWB OCR Management Dashboard with Node.js and integrated it with CRM via webhook synchronization.</li>
             <li>Built Transys Master Data management system with ERPNext (Frappe Framework) for logistics and geographical data, including RMS Rate Management and CRM integration.</li>
             <li>Developed an offline-first React Native (Expo) installer app for remote field installations with automated background photo synchronization.</li>
-            <li>Implemented the FSM distribution and installation dashboard using Laravel Filament to monitor nationwide TV distribution and school installation progress.</li>
+            <li>Implemented the FSM distribution and installation dashboard using Laravel and Node.js to monitor nationwide TV distribution and school installation progress.</li>
           </ul>
         </div>
 

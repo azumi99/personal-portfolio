@@ -13,7 +13,7 @@ interface HeroProps {
 const heroMetrics = [
   { label: 'Years Experience', value: '6+', trend: 'IT support to mobile engineering' },
   { label: 'Delivered Projects', value: '19+', trend: 'Apps, dashboards, and automation' },
-  { label: 'Primary Stack', value: 'RN', trend: 'Expo, Laravel, Filament' }
+  { label: 'Primary Stack', value: 'RN', trend: 'Expo, Laravel, Node.js' }
 ];
 
 const Hero: React.FC<HeroProps> = ({ onDownloadCV }) => {
@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ onDownloadCV }) => {
             Building mobile apps, dashboards, and automation systems.
           </h1>
           <p className="font-body-lg text-body-lg text-secondary">
-            I work with React Native, Expo, Laravel, Filament, and automation tools to ship practical software for business operations.
+            I work with React Native, Expo, Laravel, Node.js, and automation tools to ship practical software for business operations.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a href="#portfolio" className={cn(buttonVariants({ size: 'lg' }))}>
@@ -55,7 +55,7 @@ const Hero: React.FC<HeroProps> = ({ onDownloadCV }) => {
             </a>
           </div>
           <div className="pt-sm flex flex-wrap gap-2">
-            {['React Native', 'Laravel', 'Next.js', 'Filament', 'Claude Code', 'Antigravity', 'PostgreSQL', 'Supabase'].map((tech) => (
+            {['React Native', 'Laravel', 'Next.js', 'Node.js', 'Claude Code', 'Antigravity', 'PostgreSQL', 'Supabase'].map((tech) => (
               <Badge key={tech} variant="outline" className="rounded-md bg-white text-on-surface-variant">
                 {tech}
               </Badge>

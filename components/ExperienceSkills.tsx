@@ -10,8 +10,8 @@ const experiences = [
     role: 'Mobile Developer',
     company: 'ATT Group, Jakarta Barat',
     period: 'Dec 2022 — Present',
-    desc: 'Developing and maintaining mobile projects including HRIS, Wakita apps, CRM, and FedEx Monitoring Service. Engineered advanced automation workflows with n8n & AI Agents for WhatsApp verification and Intelligent OCR. Built the AWB OCR Management Dashboard (Filament) and Transys Master Data system (ERPNext). Developed the comprehensive FSM (Field Service Management) system, featuring an offline-first React Native installer app for remote school installations with automated background photo synchronization and a Filament-based distribution dashboard.',
-    tech: ['React Native', 'Laravel', 'n8n', 'Filament', 'ERPNext']
+    desc: 'Developing and maintaining mobile projects including HRIS, Wakita apps, CRM, and FedEx Monitoring Service. Engineered advanced automation workflows with n8n & AI Agents for WhatsApp verification and Intelligent OCR. Built the AWB OCR Management Dashboard (Node.js) and Transys Master Data system (ERPNext). Developed the comprehensive FSM (Field Service Management) system, featuring an offline-first React Native installer app for remote school installations with automated background photo synchronization and a Node.js-based distribution dashboard.',
+    tech: ['React Native', 'Laravel', 'n8n', 'Node.js', 'ERPNext']
   },
   {
     role: 'IT Support Specialist',
@@ -88,7 +88,7 @@ const ExperienceSkills: React.FC = () => {
                     { name: 'React Native' },
                     { name: 'Laravel' },
                     { name: 'Next.js' },
-                    { name: 'Filament' }
+                    { name: 'Node.js' }
                   ].map((skill) => (
                     <Card key={skill.name} size="sm" className="bg-surface-container-low border-outline-variant/10 shadow-none">
                       <CardContent className="flex items-center justify-center">

@@ -44,6 +44,45 @@ function wrapText(text: string, maxLength: number) {
   return lines;
 }
 
+// Word spacing for justification: stretch spaces so text fills the line width.
+// Uses real Helvetica AFM widths (per mille) so the right edge lands precisely on the margin.
+const HELV_REG: Record<string, number> = {};
+const HELV_BOLD: Record<string, number> = {};
+(function initWidths() {
+  const reg = "278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015";
+  const regChars = " !\"#$%&'()*+,-./0123456789:;<=>?@";
+  regChars.split("").forEach((c, i) => (HELV_REG[c] = Number(reg.split(",")[i])));
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach((c, i) => (HELV_REG[c] = [667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611][i]));
+  "abcdefghijklmnopqrstuvwxyz".split("").forEach((c, i) => (HELV_REG[c] = [556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500][i]));
+
+  const bold = "278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,278,333,556,333";
+  const boldChars = " !\",-.069:;AEMSTWz"; // fallback base for common chars
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach((c, i) => (HELV_BOLD[c] = [722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611][i]));
+  "abcdefghijklmnopqrstuvwxyz".split("").forEach((c, i) => (HELV_BOLD[c] = [556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500][i]));
+  HELV_BOLD[" "] = 278; HELV_BOLD[","] = 278; HELV_BOLD["."] = 278; HELV_BOLD["-"] = 333; HELV_BOLD["/"] = 278;
+  HELV_BOLD[":"] = 278; HELV_BOLD[";"] = 278; HELV_BOLD["("] = 333; HELV_BOLD[")"] = 333; HELV_BOLD["|"] = 260;
+  "0123456789".split("").forEach((c) => (HELV_BOLD[c] = 556));
+  void bold; void boldChars;
+})();
+
+function measureHelvetica(text: string, size: number, bold: boolean) {
+  const table = bold ? HELV_BOLD : HELV_REG;
+  let width = 0;
+  for (const ch of text) {
+    width += (table[ch] ?? 556) / 1000;
+  }
+  return width * size;
+}
+
+function estimateWordSpacing(text: string, size: number, bold: boolean) {
+  const spaceCount = (text.match(/ /g) || []).length;
+  if (spaceCount < 1) return 0;
+  const textWidth = measureHelvetica(text, size, bold);
+  const lineWidth = 595.28 - 48 * 2;
+  const extra = Math.max(0, lineWidth - textWidth);
+  return extra / spaceCount;
+}
+
 function escapePdfText(text: string) {
   return text.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
 }
@@ -60,25 +99,44 @@ export function generateCvPdf(portfolioUrl: string) {
     { text: "", size: 8 },
     { text: "PROFESSIONAL SUMMARY", size: 11, bold: true },
     {
-      text: "Mobile Developer with 3 years of IT Support experience, transitioning into development in December 2022. Earned a Bachelor's degree in Information Systems from Universitas Bina Sarana Informatika. Specializes in cross-platform mobile apps (React Native, Expo), Laravel API integrations, Filament dashboards, automation workflows, and business systems supporting real operations.",
+      text: "Mobile Developer with 3 years of IT Support experience, transitioning into development in December 2022. Earned a Bachelor's degree in Information Systems from Universitas Bina Sarana Informatika. Specializes in cross-platform mobile apps (React Native, Expo), Laravel API integrations, Node.js services, automation workflows, and business systems supporting real operations.",
       size: 9,
     },
     { text: "", size: 8 },
     { text: "TECHNICAL SKILLS", size: 11, bold: true },
-    { text: " React Native, Expo, Laravel, Filament, Next.js", size: 9, boldPrefix: "Framework & App:" },
+    { text: " React Native, Expo, Laravel, Node.js, Next.js", size: 9, boldPrefix: "Framework & App:" },
     { text: " WordPress, ERPNext, Frappe", size: 9, boldPrefix: "CMS & Backend:" },
     { text: " n8n, Claude Code, Antigravity, OpenClaw, Hermes", size: 9, boldPrefix: "AI Agent & Automation:" },
     { text: " MySQL, PostgreSQL, SQLite, Supabase, Firebase", size: 9, boldPrefix: "Databases & Cloud:" },
     { text: " MikroTik, Networking, VMware ESXi, Synology NAS", size: 9, boldPrefix: "Infrastructure & Ops:" },
     { text: "", size: 8 },
     { text: "PROFESSIONAL EXPERIENCE", size: 11, bold: true },
-    { text: "Mobile Developer | ATT Group, Jakarta Barat", size: 10, bold: true, date: "Dec 2022 - Present" },
-    { text: "- Developed and maintained mobile projects: HRIS, Wakita apps, CRM, FedEx Monitoring Service, and FSM.", size: 9 },
-    { text: "- Engineered automation workflows with n8n and AI agents for WhatsApp verification and intelligent OCR.", size: 9 },
-    { text: "- Built AWB OCR Management Dashboard with Filament, integrated with CRM via webhook synchronization.", size: 9 },
-    { text: "- Built Transys Master Data (ERPNext/Frappe) for logistics and geographical data, including RMS Rate Management and CRM integration.", size: 9 },
-    { text: "- Developed an offline-first React Native (Expo) installer app with automated background photo synchronization.", size: 9 },
-    { text: "- Implemented FSM distribution and installation dashboard (Laravel Filament) for nationwide TV distribution and school installation progress.", size: 9 },
+    { text: "Mobile Developer | PT Paramitha Adikarya Teknologi / ATT Group, Jakarta Barat", size: 10, bold: true, date: "Dec 2022 - Present" },
+    { text: "- Develop and maintain production mobile applications using React Native, including internal and operational applications.", size: 9 },
+    { text: "- Build mobile applications using Expo and Expo Router, with custom configurations and architecture based on project requirements.", size: 9 },
+    { text: "- Create and manage custom Expo development clients to support custom native modules and functionality beyond Expo Go capabilities.", size: 9 },
+    { text: "- Integrate and develop native Android functionality with React Native applications for features that require platform-specific capabilities.", size: 9 },
+    { text: "- Implement background location and geofencing features to support location-based operational workflows and automation.", size: 9 },
+    { text: "- Integrate REST APIs and GraphQL to enable communication between mobile applications and backend services.", size: 9 },
+    { text: "- Implement SQLite and local data storage for offline capabilities, local caching, and application data persistence.", size: 9 },
+    { text: "- Integrate Firebase Cloud Messaging (FCM) to support push notifications and real-time application events.", size: 9 },
+    { text: "- Implement authentication, data synchronization, API state management, error handling, and network-related functionality across mobile applications.", size: 9 },
+    { text: "- Develop reusable UI components and application features using Gluestack UI, Tailwind CSS, and component-based architecture.", size: 9 },
+    { text: "- Perform debugging, troubleshooting, maintenance, and performance optimization across development and production environments.", size: 9 },
+    { text: "- Optimize mobile application performance, including rendering, network requests, state management, local storage, and background processes.", size: 9 },
+    { text: "- Manage Android SDK, Expo SDK, native dependencies, Gradle, NDK, and build configurations for production applications.", size: 9 },
+    { text: "- Handle Android build, signing, versioning, release, and deployment processes through Google Play Console.", size: 9 },
+    { text: "- Perform React Native and Expo dependency upgrades while resolving compatibility issues between JavaScript libraries and native Android components.", size: 9 },
+    { text: "- Develop and integrate backend APIs using Laravel, CodeIgniter, and Node.js to support mobile application requirements.", size: 9 },
+    { text: "- Work with MySQL and PostgreSQL, including database queries, data integration, and performance optimization.", size: 9 },
+    { text: "- Develop and customize applications using the Frappe Framework / ERPNext to support internal business processes and system integrations.", size: 9 },
+    { text: "- Develop automation workflows using n8n to connect applications, APIs, databases, and internal business processes.", size: 9 },
+    { text: "- Develop AI/OCR processing pipelines for automated document and image data extraction and validation using vision AI models.", size: 9 },
+    { text: "- Optimize concurrent image processing to improve throughput for high-volume OCR workloads.", size: 9 },
+    { text: "- Develop Change Data Capture (CDC) systems using Debezium and Apache Kafka for data replication across systems.", size: 9 },
+    { text: "- Build user interfaces and web applications using Next.js for various internal systems and application requirements.", size: 9 },
+    { text: "- Manage application deployment and services using Docker, PM2, Linux, and Cloudflare Tunnel.", size: 9 },
+    { text: "- Collaborate with cross-functional teams to analyze requirements, develop features, troubleshoot issues, and deliver production-ready applications.", size: 9 },
     { text: "", size: 8 },
     { text: "IT Support Specialist | ATT Group, Jakarta Barat", size: 10, bold: true, date: "2019 - 2022" },
     { text: "- Responsible for technical support, network installation, and hardware maintenance.", size: 9 },
@@ -94,19 +152,19 @@ export function generateCvPdf(portfolioUrl: string) {
     { text: "", size: 8 },
     { text: "SELECTED PROJECTS", size: 11, bold: true },
     {
-      text: "FSM Field Service Management, FSM Dashboard, Lancar Business Finance Tracker, Intelligent OCR & CRM Automation, AWB OCR Management Dashboard, WP Auto AI Content SaaS, All Indonesian AI Media, WA Verification AI Automation, Transys Master Data ERPNext, FedEx Monitoring Service, Mobile CRM Transys, Logistika Mobile.",
+      text: "FSM Field Service Management, Lancar Business Finance Tracker, Intelligent OCR & CRM Automation, AWB OCR Management Dashboard, All Indonesian AI Media, WA Verification AI Automation, Transys Master Data ERPNext, FedEx Monitoring Service, Mobile CRM Transys, Logistika Mobile.",
       size: 9,
     },
   ];
 
-  const pageWidth = 595;
-  const pageHeight = 842;
+  const pageWidth = 595.28; // A4: 210mm
+  const pageHeight = 841.89; // A4: 297mm
   const margin = 48;
   const pages: string[] = [];
   let operations: string[] = [];
   let y = pageHeight - margin;
 
-  function addLine(text: string, size: number, bold = false, date?: string, boldPrefix?: string, color?: string) {
+  function addLine(text: string, size: number, bold = false, date?: string, boldPrefix?: string, color?: string, indent = 0) {
     if (y < margin + 24) {
       pages.push(operations.join("\n"));
       operations = [];
@@ -115,14 +173,15 @@ export function generateCvPdf(portfolioUrl: string) {
 
     const colorOp = color ? `${color} rg` : "";
     const resetOp = color ? "0 0 0 rg" : "";
+    const x = margin + indent;
 
     if (boldPrefix) {
       const prefixWidth = estimateTextWidth(boldPrefix, size, true) + 4;
-      operations.push(`BT /F2 ${size} Tf ${margin} ${y} Td (${escapePdfText(boldPrefix)}) Tj ET`);
-      operations.push(`BT /F1 ${size} Tf ${margin + prefixWidth} ${y} Td ${colorOp} (${escapePdfText(text)}) Tj ${resetOp} ET`);
+      operations.push(`BT /F2 ${size} Tf ${x} ${y} Td (${escapePdfText(boldPrefix)}) Tj ET`);
+      operations.push(`BT /F1 ${size} Tf ${x + prefixWidth} ${y} Td ${colorOp} (${escapePdfText(text)}) Tj ${resetOp} ET`);
     } else {
       const font = bold ? "F2" : "F1";
-      operations.push(`BT /${font} ${size} Tf ${margin} ${y} Td ${colorOp} (${escapePdfText(text)}) Tj ${resetOp} ET`);
+      operations.push(`BT /${font} ${size} Tf ${x} ${y} Td ${colorOp} (${escapePdfText(text)}) Tj ${resetOp} ET`);
     }
 
     if (date) {
@@ -153,10 +212,15 @@ export function generateCvPdf(portfolioUrl: string) {
 
     const maxLength = line.size >= 11 ? 68 : 95;
     const wrapped = wrapText(line.text, maxLength);
+    // Hanging indent: continuation lines of bullets align with the text after "- "
+    const isBullet = line.text.startsWith("- ");
+    const indent = isBullet ? measureHelvetica("- ", line.size, false) : 0;
+    const bulletWrapLength = isBullet ? maxLength - 4 : maxLength;
+    const rewrapped = isBullet ? wrapText(line.text, bulletWrapLength) : wrapped;
 
-    for (let w = 0; w < wrapped.length; w++) {
-      const isLastWrap = w === wrapped.length - 1;
-      addLine(wrapped[w], line.size, line.bold, isLastWrap ? line.date : undefined, line.boldPrefix, line.color);
+    for (let w = 0; w < rewrapped.length; w++) {
+      const isLastWrap = w === rewrapped.length - 1;
+      addLine(rewrapped[w], line.size, line.bold, isLastWrap ? line.date : undefined, line.boldPrefix, line.color, w > 0 ? indent : 0);
     }
 
     if (isSectionHeader) {
