@@ -4,6 +4,7 @@ import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
@@ -48,8 +49,15 @@ export default function Page() {
             <h2 className="text-xl font-bold">About</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <div className="max-w-full text-pretty font-sans leading-relaxed text-on-surface-variant">
-              {DATA.summary}
+            <div className="prose-about max-w-full text-pretty font-sans leading-relaxed text-on-surface-variant">
+              <ReactMarkdown
+                components={{
+                  p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+                  strong: ({ children }) => <strong className="font-semibold text-on-surface">{children}</strong>,
+                }}
+              >
+                {DATA.summary}
+              </ReactMarkdown>
             </div>
           </BlurFade>
         </div>

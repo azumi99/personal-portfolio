@@ -19,6 +19,15 @@ import {
   SiWordpress,
 } from "react-icons/si";
 
+// Years of experience: from latest Mobile Developer start (Dec 2022) to present
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const CAREER_START = new Date(2022, 11, 1); // Dec 2022
+export const YEARS_OF_EXPERIENCE = Math.max(
+  1,
+  Math.floor((Date.now() - CAREER_START.getTime()) / (1000 * 60 * 60 * 24 * 365.25)),
+);
+void MONTHS;
+
 export const DATA = {
   name: "Ilham Tegar Bintang Ananda",
   initials: "IT",
@@ -27,8 +36,11 @@ export const DATA = {
   locationLink: "https://www.google.com/maps/place/Tangerang+Selatan",
   description:
     "Mobile Apps Developer specializing in React Native, Expo, Laravel, Node.js, and automation systems for business operations.",
-  summary:
-    "I have 3 years of experience in IT Support and transitioned into a Mobile Developer role in December 2022. I recently earned my Bachelor's degree in Information Systems from Universitas Bina Sarana Informatika. I specialize in cross-platform mobile applications using React Native and Expo, with hands-on experience developing Laravel API integrations, Node.js services, automation workflows, and business systems that support real operations.",
+  summary: `Mobile Developer with ${YEARS_OF_EXPERIENCE}+ years of experience in software development, specializing in React Native and Expo for building and maintaining production mobile applications. Experienced in developing scalable mobile solutions, integrating REST APIs and GraphQL, implementing native Android functionality, and working with technologies such as SQLite, Firebase Cloud Messaging, background location, and geofencing.
+
+Beyond mobile development, I have hands-on experience across backend development, AI/OCR processing, automation, data replication, and web application development. I enjoy working across different layers of a system, from mobile interfaces and native integrations to APIs, databases, automation workflows, and infrastructure.
+
+I am passionate about solving practical problems through technology, improving application performance and reliability, and building solutions that can be effectively used in real-world production environments.`,
   avatarUrl: "/assets/img/profile.jpg",
   skills: [
     { name: "React Native", category: "Framework & App", icon: SiReact },
